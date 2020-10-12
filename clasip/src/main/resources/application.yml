@@ -8,3 +8,6 @@ spring:
     password: 131428
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
+
+mybatis:
+  type-aliases-package: com.liujiayi.clasip.pojo #entity存放对应的实体对象
