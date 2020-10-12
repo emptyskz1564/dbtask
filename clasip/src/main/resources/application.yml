@@ -1,2 +1,10 @@
 server:
-  port: 8070
+  port: 8080
+
+spring:
+  datasource:
+    #url: jdbc:mysql:///ssm?useUnicode=true&characterEncoding=UTF-8&useSSL=false&autoReconnect=true&failOverReadOnly=false&serverTimezone=CTT
+    url: jdbc:mysql://139.196.86.99:3306/clasip?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    password: 131428
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
