@@ -1,6 +1,7 @@
 package com.liujiayi.clasip.controller;
 
 import com.liujiayi.clasip.dao.StudentDao;
+import com.liujiayi.clasip.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,6 @@ public class GetAllStudents {
     @RequestMapping("/allstudents")
     @ResponseBody
     public Object test1(){
-        return studentDao.selectList(null);
+        return Result.successs(studentDao.selectList(null));
     }
 }
