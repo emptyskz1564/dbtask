@@ -5,16 +5,27 @@ import lombok.ToString;
 
 /**
  * 统一结果返回
+ * @author 刘斯昊
+ * @date 2020/10/15
  */
 @Getter
 @ToString
 public class Result {
 
-    //业务代码
+    /**
+     * code
+     * 业务代码
+     */
     private String code;
-    //信息描述
+    /**
+     * message
+     * 请求返回消息
+     */
     private String message;
-    //返回参数
+    /**
+     * data
+     * 返回数据
+     */
     private Object data;
 
     public Result(String code, String message, Object data) {

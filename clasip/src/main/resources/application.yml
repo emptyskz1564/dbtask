@@ -11,3 +11,8 @@ spring:
 
 mybatis:
   type-aliases-package: com.liujiayi.clasip.pojo #entity存放对应的实体对象
+
+# Mybatis-plus日志
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

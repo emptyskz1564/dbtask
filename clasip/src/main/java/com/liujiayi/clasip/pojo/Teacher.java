@@ -4,8 +4,14 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.*;
 import org.springframework.stereotype.Repository;
 
+import java.io.Serializable;
 import java.util.List;
 
+/**
+ * @author 刘斯昊
+ * @date 2020/10/15
+ * 老师实体类
+ */
 @Data
 @Setter
 @Getter
@@ -14,10 +20,17 @@ import java.util.List;
 @ToString
 @Repository
 @TableName("Teacher")
-public class Teacher {
-    Integer tid;
+public class Teacher implements Serializable {
+    /**
+     * tid
+     * 数据库主键，自创账号
+     */
+    String tid;
+
+
     String pwd;
     String name;
     String info;
     List<Class> holdClasses;
+
 }

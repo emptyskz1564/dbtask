@@ -21,7 +21,12 @@ import java.io.Serializable;
 @Repository
 @TableName("Student")
 public class Student implements Serializable {
-    Integer sid;
+    /**
+     * sid
+     * 数据库主键 学生学号以及登录账号
+     */
+    String sid;
+
     String pwd;
     String name;
     String major;

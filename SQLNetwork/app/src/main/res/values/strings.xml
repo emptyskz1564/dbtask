@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">SQLNetwork</string>
+    <string name="btn_1">test</string>
+    <string name="text1">return data</string>
+    <string name="btn_2">getRequest</string>
+    <string name="text2">TextView</string>
+</resources>
