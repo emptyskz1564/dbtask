@@ -38,6 +38,10 @@ public class Result {
         return new Result(Constants.SUCCESS_CODE,Constants.SUCCESS_MSG,null);
     }
 
+    public static Result successs(String msg){
+        return new Result(Constants.SUCCESS_CODE,msg,null);
+    }
+
     public static Result successs(Object data){
         return new Result(Constants.SUCCESS_CODE,Constants.SUCCESS_MSG,data);
     }

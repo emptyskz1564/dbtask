@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.sqlnetwork.domain.Result;
+import com.example.sqlnetwork.util.CommonUtil;
 import com.google.gson.Gson;
 import com.squareup.okhttp.Call;
 import com.squareup.okhttp.Callback;
@@ -34,10 +35,9 @@ public class OkhttpActivity extends AppCompatActivity {
 
     public void getRequest(View view){
         //创建客户端
-        OkHttpClient okHttpClient = new OkHttpClient();
-        okHttpClient.setConnectTimeout(5000,TimeUnit.MILLISECONDS);
+        OkHttpClient okHttpClient = CommonUtil.getClient();
         //创建请求
-        final Request request = new Request.Builder().get().url("http://10.0.2.2:8080/allstudents").build();
+        Request request = CommonUtil.getRequest("http://10.0.2.2:8080/allstudents");
         //创建请求任务
         Call call = okHttpClient.newCall(request);
         //异步请求
@@ -50,7 +50,7 @@ public class OkhttpActivity extends AppCompatActivity {
             @Override
             public void onResponse(Response response) throws IOException {
                 ResponseBody body = response.body();
-                Gson gson = new Gson();
+                Gson gson = CommonUtil.getGson();
                 Result result = gson.fromJson(body.toString(), Result.class);
                 List<Result.Student> students = result.getData();
                 for (Result.Student student : students) {
@@ -59,5 +59,6 @@ public class OkhttpActivity extends AppCompatActivity {
             }
         });
     }
+
 
 }

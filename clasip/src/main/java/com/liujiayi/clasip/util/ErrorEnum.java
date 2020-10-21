@@ -3,6 +3,7 @@ package com.liujiayi.clasip.util;
 
 /**
  * 错误信息类
+ * @author 刘斯昊
  */
 public enum ErrorEnum {
     /*
