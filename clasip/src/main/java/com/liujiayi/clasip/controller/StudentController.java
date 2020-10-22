@@ -89,5 +89,28 @@ public class StudentController {
         }
     }
 
+    /**
+     * 获取某学生的所有课程
+     * @param sid   学号
+     * @return  所有课程列表
+     */
+    @GetMapping("/getAllClassBySid/{sid}")
+    public Object getAllClassBySid(@PathVariable("sid") String sid){
+        List<Class> allClass = studentService.getAllClassBySid(sid);
+        return Result.successs(allClass);
+    }
+
+    /**
+     * 根据某一课程id获取课程消息
+     * @param cid   课程id
+     * @return  课程信息
+     */
+    @GetMapping("getClassInfoByCid/{cid}")
+    public Object getClassInfoByCid(@PathVariable("cid") String cid){
+        Class classByCid = studentService.getClassByCid(cid);
+        return Result.successs(classByCid);
+    }
+
+
 
 }

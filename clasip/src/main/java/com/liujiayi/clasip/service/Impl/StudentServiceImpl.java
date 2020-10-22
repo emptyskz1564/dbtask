@@ -65,5 +65,10 @@ public class StudentServiceImpl implements StudentService {
 
         return null;
     }
+
+    @Override
+    public Class getClassByCid(String cid) {
+        return null;
+    }
 }
 

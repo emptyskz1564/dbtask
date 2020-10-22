@@ -52,4 +52,12 @@ public interface StudentService {
      * @return  所有的课程
      */
     List<Class> getAllClassBySid(String sid);
+
+    /**
+     * 学生端获取某个课程信息
+     * @param cid 课程id
+     * @return  返回课程信息
+     */
+    Class getClassByCid(String cid);
+
 }
