@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -79,12 +80,12 @@ public class StudentController {
     /**
      * 加入课程方法
      * @param sid   学生学号
-     * @param classCode     课程码
+     * @param cid     课程号
      * @return  加入课程消息
      */
-    @GetMapping("/addStudentToClass/{sid}/{classCode}")
-    public Object addStudentToClass(@PathVariable("sid") String sid,@PathVariable("classCode") String classCode){
-        boolean code = studentService.addStudentToClass(sid, classCode);
+    @GetMapping("/addStudentToClass/{sid}/{cid}")
+    public Object addStudentToClass(@PathVariable("sid") String sid,@PathVariable("cid") String cid){
+        boolean code = studentService.addStudentToClass(sid, cid);
         if(code == true){
             return Result.successs("加入课程成功！");
         }else{
@@ -114,9 +115,9 @@ public class StudentController {
         return Result.successs(classByCid);
     }
 
-    @GetMapping("/signUp/{sid}/{cid}/{time}")
-    public Object signUp(@PathVariable("sid") String sid, @PathVariable("cid") String cid, @PathVariable("time")LocalDateTime time){
-        SignUp signUp = new SignUp(sid, cid, true, time, time);
+    @GetMapping("/signUp/{sid}/{cid}/{version}")
+    public Object signUp(@PathVariable("sid") String sid, @PathVariable("cid") String cid, @PathVariable("version")Integer version){
+        SignUp signUp = new SignUp(sid,cid,version,LocalDateTime.now());
         studentService.signUp(signUp);
         return null;
     }

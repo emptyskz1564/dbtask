@@ -21,9 +21,9 @@ import java.time.LocalDateTime;
 @Repository
 @TableName("SignUp")
 public class SignUp implements Serializable {
-    String sid;
-    String cid;
-    Boolean isCome;
-    LocalDateTime startTime;
-    LocalDateTime endTime;
+    private String sid;
+    private String cid;
+    private Integer version;
+    private LocalDateTime signUpTime;
+
 }

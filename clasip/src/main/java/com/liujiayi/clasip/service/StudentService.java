@@ -36,10 +36,10 @@ public interface StudentService {
     /**
      * 学生加入课程方法
      * @param sid 学生学号
-     * @param classCode 课程码
+     * @param cid 课程号
      * @return  登录信息
      */
-    boolean addStudentToClass(String sid, String classCode);
+    boolean addStudentToClass(String sid, String cid);
 
     /**
      * 学生端注册方法

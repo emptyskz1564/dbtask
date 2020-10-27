@@ -23,6 +23,5 @@ public class Constants {
     public static final String RESULT_CODE = "code";
     public static final String RESULT_MESSAGE = "message";
     public static final String STUDENT_ID = "sid";
-    public static final String CLASS_CODE = "classCode";
     public static final String CLASS_ID = "cid";
 }

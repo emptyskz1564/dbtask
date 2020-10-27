@@ -55,9 +55,9 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public boolean addStudentToClass(String sid, String classCode) {
+    public boolean addStudentToClass(String sid, String cid) {
         HashMap<String, Object> conditions = new HashMap<>();
-        conditions.put(Constants.CLASS_CODE,classCode);
+        conditions.put(Constants.CLASS_ID,cid);
         List<Class> classes = classDao.selectByMap(conditions);
         int i = classStudentDao.insert(new ClassStudent(classes.get(0).getCid(), sid));
         return i>0;
