@@ -10,6 +10,8 @@ import java.util.concurrent.TimeUnit;
 
 public class CommonUtil {
 
+    private CommonUtil(){}
+
     private static Gson gson = new Gson();
     private static OkHttpClient client = new OkHttpClient();
 
@@ -24,7 +26,7 @@ public class CommonUtil {
 
     /**
      * @author 刘斯昊
-     * @param url
+     * @param url 请求链接
      * @return 返回一个不包含请求体的request请求
      */
     public static Request getRequest(String url){
@@ -34,11 +36,11 @@ public class CommonUtil {
 
     /**
      *
-     * @param url
-     * @param requestBody
+     * @param url   请求链接
+     * @param requestBody   请求体
      * @return  返回一个包含请求体的request请求
      */
-    public static Request getRequest(String url,String requestBody){
+    public static Request postRequest(String url,String requestBody){
         MediaType parse = MediaType.parse("application/json");
         RequestBody Body = RequestBody.create(parse,requestBody);
         Request request = new Request.Builder().post(Body).url(url).build();

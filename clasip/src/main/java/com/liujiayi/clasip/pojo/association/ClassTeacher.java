@@ -19,6 +19,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 @TableName("TeacherClass")
 public class ClassTeacher {
-    private Integer tid;
-    private Integer cid;
+    private String tid;
+    private String cid;
 }

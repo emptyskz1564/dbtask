@@ -31,6 +31,5 @@ public class Teacher implements Serializable {
     String pwd;
     String name;
     String info;
-    List<Class> holdClasses;
 
 }

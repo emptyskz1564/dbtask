@@ -42,37 +42,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void getAllStudent(View view){
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    URL url = new URL("http://10.0.2.2:8080/allstudents");
-                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                    connection.setRequestMethod("GET");
-                    connection.setConnectTimeout(10000);
-                    connection.connect();
-                    if(connection.getResponseCode() == 200){
-                        System.out.println("请求成功！！！！！！！！！！！！！！！！！！！！！！！！！！！");
-                        InputStream inputStream = connection.getInputStream();
-                        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-                        final String line = bufferedReader.readLine();
-                        Gson gson = new Gson();
-                        Result result = gson.fromJson(line,Result.class);
-                        final List<Result.Student> data = result.getData();
-
-                        System.out.println();
-                        MainActivity.this.runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                text1.setText(data.toString());
-                            }
-                        });
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
     }
 
 

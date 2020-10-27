@@ -1,5 +1,7 @@
 package com.liujiayi.clasip.controller;
 
+import com.liujiayi.clasip.pojo.Class;
+import com.liujiayi.clasip.pojo.SignUp;
 import com.liujiayi.clasip.pojo.Student;
 import com.liujiayi.clasip.service.StudentService;
 import com.liujiayi.clasip.util.Constants;
@@ -8,6 +10,7 @@ import com.liujiayi.clasip.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -105,12 +108,17 @@ public class StudentController {
      * @param cid   课程id
      * @return  课程信息
      */
-    @GetMapping("getClassInfoByCid/{cid}")
+    @GetMapping("/getClassInfoByCid/{cid}")
     public Object getClassInfoByCid(@PathVariable("cid") String cid){
         Class classByCid = studentService.getClassByCid(cid);
         return Result.successs(classByCid);
     }
 
-
+    @GetMapping("/signUp/{sid}/{cid}/{time}")
+    public Object signUp(@PathVariable("sid") String sid, @PathVariable("cid") String cid, @PathVariable("time")LocalDateTime time){
+        SignUp signUp = new SignUp(sid, cid, true, time, time);
+        studentService.signUp(signUp);
+        return null;
+    }
 
 }

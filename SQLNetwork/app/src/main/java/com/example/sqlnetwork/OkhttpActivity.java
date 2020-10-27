@@ -19,7 +19,6 @@ import com.squareup.okhttp.ResponseBody;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class OkhttpActivity extends AppCompatActivity {
 

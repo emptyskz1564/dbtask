@@ -1,5 +1,7 @@
 package com.liujiayi.clasip.service;
 
+import com.liujiayi.clasip.pojo.Class;
+import com.liujiayi.clasip.pojo.SignUp;
 import com.liujiayi.clasip.pojo.Student;
 
 import java.util.List;
@@ -60,4 +62,10 @@ public interface StudentService {
      */
     Class getClassByCid(String cid);
 
+    /**
+     * 学生端签到接口
+     * @param signUp 签到信息
+     * @return  返回签到成功信息
+     */
+    boolean signUp(SignUp signUp);
 }

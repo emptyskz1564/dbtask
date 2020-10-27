@@ -30,6 +30,5 @@ public class Student implements Serializable {
     String pwd;
     String name;
     String major;
-    String className;
     String grade;
 }
