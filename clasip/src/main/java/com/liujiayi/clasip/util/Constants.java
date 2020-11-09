@@ -24,4 +24,7 @@ public class Constants {
     public static final String RESULT_MESSAGE = "message";
     public static final String STUDENT_ID = "sid";
     public static final String CLASS_ID = "cid";
+    public static final String STUDENTS = "students";
+    public static final String TEACHER = "teacher";
+    public static final String CLASS_INFO = "classInfo";
 }
