@@ -2,7 +2,7 @@ package com.example.sqlnetwork.util;
 
 public enum UrlEnum {
 
-    REGISTER("注册链接",""),
+    REGISTER("注册链接","http://localhost:8080/register"),
     ALL_CLASS("获取全部课程链接",""),
     STUDENT_INFO("获取个人信息",""),
     ADD_TO_CLASS("加入课程链接",""),

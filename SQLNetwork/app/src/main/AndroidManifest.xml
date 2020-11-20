@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".OkhttpActivity">
+        <activity android:name=".Register">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -8,17 +8,18 @@ import com.liujiayi.clasip.util.Constants;
 import com.liujiayi.clasip.util.ErrorEnum;
 import com.liujiayi.clasip.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 /**
  * @author 刘斯昊
  * @date 2020/10/15
  */
-@RestController("/student")
+@RestController
+@RequestMapping("/student")
 public class StudentController {
 
     @Autowired
@@ -32,7 +33,7 @@ public class StudentController {
     @PostMapping("/login")
     public Object login(@RequestBody String token){
         boolean code = studentService.login(token);
-        if(code == true){
+        if(code){
             return Result.successs(Constants.LOGIN_SUCCESS);
         }else{
             return Result.failure(ErrorEnum.E_401);
@@ -47,7 +48,7 @@ public class StudentController {
     @PostMapping("/register")
     public Object register(@RequestBody String studentInfo){
         boolean code = studentService.register(studentInfo);
-        if(code == true){
+        if(code){
             return Result.successs(Constants.REGISTER_SUCCESS);
         }else{
             return Result.failure(ErrorEnum.E_10009);
