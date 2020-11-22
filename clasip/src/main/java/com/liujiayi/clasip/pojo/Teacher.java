@@ -26,8 +26,6 @@ public class Teacher implements Serializable {
      * 数据库主键，自创账号
      */
     String tid;
-
-
     String pwd;
     String name;
     String info;

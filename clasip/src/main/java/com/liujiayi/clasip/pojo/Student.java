@@ -26,7 +26,6 @@ public class Student implements Serializable {
      * 数据库主键 学生学号以及登录账号
      */
     String sid;
-
     String pwd;
     String name;
     String major;

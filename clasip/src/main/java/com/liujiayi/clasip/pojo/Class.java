@@ -23,5 +23,5 @@ import java.util.List;
 @TableName("Class")
 public class Class implements Serializable {
     String cid;
-    String name;
+    String className;
 }

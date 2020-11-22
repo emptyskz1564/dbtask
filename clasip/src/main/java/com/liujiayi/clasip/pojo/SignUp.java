@@ -5,6 +5,7 @@ import lombok.*;
 import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 /**
@@ -25,5 +26,6 @@ public class SignUp implements Serializable {
     private String cid;
     private Integer version;
     private LocalDateTime signUpTime;
-
+    Double lng;//经度
+    Double lat;//纬度
 }
