@@ -12,13 +12,13 @@
         android:ems="10"
         android:hint="姓名"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/sid"
+        app:layout_constraintBottom_toTopOf="@+id/login_sid"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/sid"
+        android:id="@+id/login_sid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="136dp"
@@ -41,7 +41,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sid"
+        app:layout_constraintTop_toBottomOf="@+id/login_sid"
         app:layout_constraintVertical_bias="0.313" />
 
     <EditText

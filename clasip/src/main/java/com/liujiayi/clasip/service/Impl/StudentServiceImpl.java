@@ -15,7 +15,9 @@ import com.liujiayi.clasip.service.StudentService;
 import com.liujiayi.clasip.util.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import sun.security.provider.MD5;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -50,6 +52,8 @@ public class StudentServiceImpl implements StudentService {
         condition.put(Constants.STUDENT_ID,studentToken.getAccount());
 
         List<Student> students = studentDao.selectByMap(condition);
+
+        MD5 md5 = new MD5();
 
         return studentToken.getPassword().equals(students.get(0).getPwd());
     }

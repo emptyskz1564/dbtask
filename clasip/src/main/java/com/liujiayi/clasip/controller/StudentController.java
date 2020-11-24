@@ -47,6 +47,7 @@ public class StudentController {
      */
     @PostMapping("/register")
     public Object register(@RequestBody String studentInfo){
+        System.out.println(studentInfo);
         boolean code = studentService.register(studentInfo);
         if(code){
             return Result.successs(Constants.REGISTER_SUCCESS);
@@ -116,9 +117,9 @@ public class StudentController {
         return Result.successs(classByCid);
     }
 
-    @GetMapping("/signUp/{sid}/{cid}/{version}")
-    public Object signUp(@PathVariable("sid") String sid, @PathVariable("cid") String cid, @PathVariable("version")Integer version){
-        SignUp signUp = new SignUp(sid,cid,version,LocalDateTime.now());
+    @GetMapping("/signUp/{sid}/{cid}/{version}/{lng}/{lat}")
+    public Object signUp(@PathVariable("sid") String sid, @PathVariable("cid") String cid, @PathVariable("version")Integer version,@PathVariable("lng")Double lng,@PathVariable("lat")Double lat){
+        SignUp signUp = new SignUp(sid,cid,version,LocalDateTime.now(),lng,lat);
         studentService.signUp(signUp);
         return null;
     }

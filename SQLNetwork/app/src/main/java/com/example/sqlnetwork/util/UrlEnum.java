@@ -2,11 +2,11 @@ package com.example.sqlnetwork.util;
 
 public enum UrlEnum {
 
-    REGISTER("注册链接","http://localhost:8080/register"),
+    REGISTER("注册链接","http://192.168.43.71:8080/student/register"),
     ALL_CLASS("获取全部课程链接",""),
     STUDENT_INFO("获取个人信息",""),
     ADD_TO_CLASS("加入课程链接",""),
-    LOGIN("登录链接","");
+    LOGIN("登录链接","http://192.168.43.71:8080/student/login");
 
     private String msg;
     private String url;
