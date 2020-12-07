@@ -3,12 +3,12 @@ package com.liujiayi.clasip.controller;
 import com.liujiayi.clasip.pojo.Class;
 import com.liujiayi.clasip.pojo.SignUp;
 import com.liujiayi.clasip.pojo.Student;
+import com.liujiayi.clasip.pojo.association.OpenClass;
 import com.liujiayi.clasip.service.StudentService;
 import com.liujiayi.clasip.util.Constants;
 import com.liujiayi.clasip.util.ErrorEnum;
 import com.liujiayi.clasip.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -123,5 +123,13 @@ public class StudentController {
         studentService.signUp(signUp);
         return null;
     }
+
+    @GetMapping("getSign/{cid}")
+    public Object getSign(@PathVariable("cid") String cid){
+        List<OpenClass> sign = studentService.getSign(cid);
+        return Result.successs(sign);
+    }
+
+
 
 }

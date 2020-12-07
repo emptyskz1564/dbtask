@@ -2,22 +2,17 @@ package com.liujiayi.clasip.service.Impl;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.liujiayi.clasip.dao.ClassDao;
-import com.liujiayi.clasip.dao.ClassStudentDao;
-import com.liujiayi.clasip.dao.SignUpDao;
-import com.liujiayi.clasip.dao.StudentDao;
+import com.liujiayi.clasip.dao.*;
+import com.liujiayi.clasip.pojo.*;
 import com.liujiayi.clasip.pojo.Class;
-import com.liujiayi.clasip.pojo.SignUp;
-import com.liujiayi.clasip.pojo.Student;
-import com.liujiayi.clasip.pojo.Token;
 import com.liujiayi.clasip.pojo.association.ClassStudent;
+import com.liujiayi.clasip.pojo.association.OpenClass;
 import com.liujiayi.clasip.service.StudentService;
 import com.liujiayi.clasip.util.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sun.security.provider.MD5;
 
-import java.lang.reflect.Type;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -32,6 +27,8 @@ public class StudentServiceImpl implements StudentService {
     @Autowired ClassDao classDao;
     @Autowired ClassStudentDao classStudentDao;
     @Autowired SignUpDao signUpDao;
+    @Autowired
+    OpenClassDao openClassDao;
 
     @Override
     public List<Student> getAllStudentByCid(String cid) {
@@ -53,7 +50,6 @@ public class StudentServiceImpl implements StudentService {
 
         List<Student> students = studentDao.selectByMap(condition);
 
-        MD5 md5 = new MD5();
 
         return studentToken.getPassword().equals(students.get(0).getPwd());
     }
@@ -103,5 +99,22 @@ public class StudentServiceImpl implements StudentService {
         int insert = signUpDao.insert(signUp);
         return insert>0;
     }
+
+    @Override
+    public List<OpenClass> getSign(String cid) {
+        HashMap<String, Object> condition = new HashMap<>();
+        condition.put(Constants.CLASS_ID,cid);
+        ArrayList<OpenClass> result = new ArrayList<>();
+        List<OpenClass> openClasses = openClassDao.selectByMap(condition);
+        for(OpenClass signUp : openClasses){
+            if(signUp.getStart_time().getDayOfMonth() == LocalDateTime.now().getDayOfMonth() && signUp.getStart_time().getMinute() >= LocalDateTime.now().getMinute() - 10 && signUp.getStart_time().getMinute() <= LocalDateTime.now().getMinute() + 10 ){
+                result.add(signUp);
+            }
+        }
+
+        return result;
+    }
+
+
 }
 

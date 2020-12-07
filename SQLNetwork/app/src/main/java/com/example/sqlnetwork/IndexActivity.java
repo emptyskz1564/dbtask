@@ -6,8 +6,26 @@ import android.os.PersistableBundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.sqlnetwork.adapters.GetClassListAdapter;
+import com.example.sqlnetwork.domain.ClassResult;
+import com.example.sqlnetwork.util.CommonUtil;
+import com.example.sqlnetwork.util.UrlEnum;
+import com.google.gson.Gson;
+import com.squareup.okhttp.Call;
+import com.squareup.okhttp.Callback;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
+import com.squareup.okhttp.ResponseBody;
+
+import java.io.IOException;
 
 public class IndexActivity extends AppCompatActivity {
+
+    private GetClassListAdapter adapter;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
@@ -16,6 +34,53 @@ public class IndexActivity extends AppCompatActivity {
         String sid = intent.getStringExtra("sid");
 
         System.out.println(sid);
-
+        initView();
     }
+
+    public void initView(){
+        RecyclerView view = this.findViewById(R.id.recyclerView);
+        view.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new GetClassListAdapter();
+        view.setAdapter(adapter);
+    }
+
+    public void updateUI(final ClassResult classResult){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                adapter.setData(classResult);
+            }
+        });
+    }
+
+    public class init extends Thread {
+        private String sid;
+
+        init(String sid){
+            this.sid = sid;
+        }
+
+        @Override
+        public void run() {
+            Request request = CommonUtil.getRequest(UrlEnum.ALL_CLASSES_BY_SID.getUrl() + sid);
+            Call call = CommonUtil.getClient().newCall(request);
+            call.enqueue(new Callback() {
+                @Override
+                public void onFailure(Request request, IOException e) {
+                    e.printStackTrace();
+                }
+
+                @Override
+                public void onResponse(Response response) throws IOException {
+                    ResponseBody body = response.body();
+                    Gson gson = CommonUtil.getGson();
+                    ClassResult classResult = gson.fromJson(body.toString(), ClassResult.class);
+                }
+            });
+
+        }
+    }
+
+
+
 }
