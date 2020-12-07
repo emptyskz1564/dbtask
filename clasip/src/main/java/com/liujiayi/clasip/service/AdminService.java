@@ -23,4 +23,6 @@ public interface AdminService {
      * @return 教师实体类
      */
     Teacher getTeacherByCid(String cid);
+
+    int deleteClassByCid(String cid);
 }

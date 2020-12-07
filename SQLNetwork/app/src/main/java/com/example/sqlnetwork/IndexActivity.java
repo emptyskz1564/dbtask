@@ -3,6 +3,7 @@ package com.example.sqlnetwork;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.widget.EditText;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,12 +36,21 @@ public class IndexActivity extends AppCompatActivity {
 
         System.out.println(sid);
         initView();
+        new init(sid).run();
     }
 
     public void initView(){
         RecyclerView view = this.findViewById(R.id.recyclerView);
         view.setLayoutManager(new LinearLayoutManager(this));
         adapter = new GetClassListAdapter();
+        adapter.setOnItemClickListener(new GetClassListAdapter.OnItemClickListener() {
+            @Override
+            public void onClick(int position) {
+                Intent intent = new Intent(IndexActivity.this, ClassInfoActivity.class);
+                intent.putExtra("cid",adapter.getData().get(position).getCid());
+                startActivity(intent);
+            }
+        });
         view.setAdapter(adapter);
     }
 
@@ -75,12 +85,18 @@ public class IndexActivity extends AppCompatActivity {
                     ResponseBody body = response.body();
                     Gson gson = CommonUtil.getGson();
                     ClassResult classResult = gson.fromJson(body.toString(), ClassResult.class);
+                    updateUI(classResult);
                 }
             });
 
         }
     }
 
+    public void addClass(){
+        EditText editText = findViewById(R.id.Class_Code);
+        String classCode = editText.getText().toString();
+
+    }
 
 
 }

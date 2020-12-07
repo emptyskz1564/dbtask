@@ -43,5 +43,14 @@ public class AdminServiceImpl implements AdminService {
         return teacher;
     }
 
+    @Override
+    public int deleteClassByCid(String cid) {
+        QueryWrapper<Class> classQueryWrapper = new QueryWrapper<>();
+        classQueryWrapper.eq(Constants.CLASS_ID,cid);
+        int delete = classDao.delete(classQueryWrapper);
+
+        return delete;
+    }
+
 
 }
