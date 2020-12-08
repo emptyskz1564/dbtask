@@ -18,7 +18,7 @@ import org.springframework.stereotype.Repository;
 @NoArgsConstructor
 @Repository
 @TableName("TeacherClass")
-public class ClassTeacher {
+public class TeacherClass {
     private String tid;
     private String cid;
 }

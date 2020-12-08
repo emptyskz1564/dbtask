@@ -2,7 +2,7 @@ package com.liujiayi.clasip.dao;
 
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.liujiayi.clasip.pojo.association.ClassTeacher;
+import com.liujiayi.clasip.pojo.association.TeacherClass;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -11,5 +11,5 @@ import org.springframework.stereotype.Repository;
  */
 @Mapper
 @Repository
-public interface ClassTeacherDao extends BaseMapper<ClassTeacher> {
+public interface ClassTeacherDao extends BaseMapper<TeacherClass> {
 }

@@ -6,7 +6,7 @@ import com.liujiayi.clasip.dao.ClassTeacherDao;
 import com.liujiayi.clasip.dao.TeacherDao;
 import com.liujiayi.clasip.pojo.Class;
 import com.liujiayi.clasip.pojo.Teacher;
-import com.liujiayi.clasip.pojo.association.ClassTeacher;
+import com.liujiayi.clasip.pojo.association.TeacherClass;
 import com.liujiayi.clasip.service.AdminService;
 import com.liujiayi.clasip.util.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,9 +36,9 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public Teacher getTeacherByCid(String cid) {
-        QueryWrapper<ClassTeacher> classTeacherQueryWrapper = new QueryWrapper<>();
+        QueryWrapper<TeacherClass> classTeacherQueryWrapper = new QueryWrapper<>();
         classTeacherQueryWrapper.eq(Constants.CLASS_ID,cid);
-        ClassTeacher classTeacher = classTeacherDao.selectOne(classTeacherQueryWrapper);
+        TeacherClass classTeacher = classTeacherDao.selectOne(classTeacherQueryWrapper);
         Teacher teacher = teacherDao.selectById(classTeacher.getTid());
         return teacher;
     }
