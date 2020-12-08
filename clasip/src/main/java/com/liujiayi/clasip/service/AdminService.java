@@ -24,5 +24,31 @@ public interface AdminService {
      */
     Teacher getTeacherByCid(String cid);
 
+    /**
+     * 通过cid删除课程
+     * @param cid 课程id
+     * @return 删除状态
+     */
     int deleteClassByCid(String cid);
+
+    /**
+     * 添加学生
+     * @param student 学生实体
+     * @return 添加状态
+     */
+    int addStudent(String student);
+
+    /**
+     * 删除学生
+     * @param sid 学生id
+     * @return 删除状态
+     */
+    int deleteStudent(String sid);
+
+    /**
+     * 管理端登录接口
+     * @param token token
+     * @return 登录状态
+     */
+    Boolean login(String token);
 }

@@ -7,6 +7,12 @@ package com.liujiayi.clasip.util;
  */
 public class Constants {
 
+    /**
+     * 管理员信息
+     */
+    public static final String ADMIN_ACCOUNT = "admin";
+    public static final String ADMIN_PASSWORD = "admin";
+
     public static final String SUCCESS_CODE = "200";
     /**
      * 请求成功，包含需要处理的消息
