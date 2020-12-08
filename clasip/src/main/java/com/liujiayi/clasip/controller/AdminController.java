@@ -7,11 +7,10 @@ import com.liujiayi.clasip.service.AdminService;
 import com.liujiayi.clasip.service.StudentService;
 import com.liujiayi.clasip.service.TeacherService;
 import com.liujiayi.clasip.util.Constants;
+import com.liujiayi.clasip.util.ErrorEnum;
 import com.liujiayi.clasip.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -21,7 +20,8 @@ import java.util.List;
  * @author 刘斯昊
  * @date 2020/10/21
  */
-@RestController("/admin")
+@RestController
+@RequestMapping("/admin")
 public class AdminController {
 
     @Autowired
@@ -49,11 +49,12 @@ public class AdminController {
      */
     @GetMapping("/getClassInfoByCid/{cid}")
     public Object getClassInfoByCid(@PathVariable("cid") String cid){
-
-        List<Student> allStudentByCid = studentService.getAllStudentByCid(cid);
         Class classByCid = studentService.getClassByCid(cid);
+        if(classByCid == null){
+            return Result.failure(ErrorEnum.E_90004);
+        }
         Teacher teacherByCid = adminService.getTeacherByCid(cid);
-
+        List<Student> allStudentByCid = studentService.getAllStudentByCid(cid);
         HashMap<String, Object> result = new HashMap<>();
         result.put(Constants.STUDENTS,allStudentByCid);
         result.put(Constants.TEACHER,teacherByCid);
@@ -71,5 +72,37 @@ public class AdminController {
         return Result.successs(teacherService.getAllTeacher());
     }
 
+    /**
+     * 根据cid删除课程
+     * @param cid 课程id
+     * @return 删除状态
+     */
+    @GetMapping("/deleteClassByCid/{cid}")
+    public Object deleteClassByCid(@PathVariable("cid") String cid){
+        int i = adminService.deleteClassByCid(cid);
+        return i>0 ? Result.successs("删除成功"):Result.failure(ErrorEnum.E_90004);
+    }
 
+    /**
+     * 添加学生
+     * @param student 学生实体
+     * @return 添加状态
+     */
+    @PostMapping("/addStudent")
+    public Object addStudent(@RequestBody String student){
+        int i = adminService.addStudent(student);
+        return i>0 ? Result.successs("添加成功"):Result.failure(ErrorEnum.E_10009);
+    }
+
+    @GetMapping("/deleteStudent/{sid}")
+    public Object deleteStudent(@PathVariable("sid") String sid){
+        int i = adminService.deleteStudent(sid);
+        return i>0 ? Result.successs("删除成功"):Result.failure(ErrorEnum.E_90004);
+    }
+
+    @PostMapping("/login")
+    public Object login(@RequestBody String token){
+        Boolean login = adminService.login(token);
+        return login ? Result.successs(Constants.LOGIN_SUCCESS):Result.failure(ErrorEnum.E_401);
+    }
 }
