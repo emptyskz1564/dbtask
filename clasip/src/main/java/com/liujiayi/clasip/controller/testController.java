@@ -1,5 +1,6 @@
 package com.liujiayi.clasip.controller;
 
+import com.liujiayi.clasip.util.Result;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,7 +17,8 @@ public class testController {
     @ResponseBody
     @GetMapping("/test")
     public Object test1(){
-        return "这是一个测试接口~";
+
+        return Result.successs2("这是一段测试文字~");
     }
 
 }

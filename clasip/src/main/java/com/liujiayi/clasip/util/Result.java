@@ -34,6 +34,10 @@ public class Result {
         this.data = data;
     }
 
+    public static Result successs2(Object data){
+        return new Result(Constants.SUCCESS_CODE,Constants.SUCCESS_MSG,data);
+    }
+
     public static Result success(){
         return new Result(Constants.SUCCESS_CODE,Constants.SUCCESS_MSG,null);
     }
