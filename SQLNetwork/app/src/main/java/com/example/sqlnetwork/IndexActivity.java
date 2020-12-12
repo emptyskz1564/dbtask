@@ -3,6 +3,7 @@ package com.example.sqlnetwork;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.view.View;
 import android.widget.EditText;
 
 import androidx.annotation.Nullable;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sqlnetwork.adapters.GetClassListAdapter;
 import com.example.sqlnetwork.domain.ClassResult;
+import com.example.sqlnetwork.domain.CommonResult;
 import com.example.sqlnetwork.util.CommonUtil;
 import com.example.sqlnetwork.util.UrlEnum;
 import com.google.gson.Gson;
@@ -26,14 +28,14 @@ import java.io.IOException;
 public class IndexActivity extends AppCompatActivity {
 
     private GetClassListAdapter adapter;
+    private String sid;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
         setContentView(R.layout.activity_index);
         Intent intent = getIntent();
-        String sid = intent.getStringExtra("sid");
-
+        sid = intent.getStringExtra("sid");
         System.out.println(sid);
         initView();
         new init(sid).run();
@@ -48,6 +50,7 @@ public class IndexActivity extends AppCompatActivity {
             public void onClick(int position) {
                 Intent intent = new Intent(IndexActivity.this, ClassInfoActivity.class);
                 intent.putExtra("cid",adapter.getData().get(position).getCid());
+                intent.putExtra("sid",sid);
                 startActivity(intent);
             }
         });
@@ -92,10 +95,27 @@ public class IndexActivity extends AppCompatActivity {
         }
     }
 
-    public void addClass(){
+    public void addClass(View view){
         EditText editText = findViewById(R.id.Class_Code);
         String classCode = editText.getText().toString();
+        Request request = CommonUtil.getRequest(UrlEnum.ADD_TO_CLASS + sid + "/" + classCode);
+        Call call = CommonUtil.getClient().newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Request request, IOException e) {
+                e.printStackTrace();
+            }
 
+            @Override
+            public void onResponse(Response response) throws IOException {
+                ResponseBody body = response.body();
+                Gson gson = CommonUtil.getGson();
+                CommonResult commonResult = gson.fromJson(body.toString(), CommonResult.class);
+                if("200".equals(commonResult.getCode())){
+                    new init(sid).run();
+                }
+            }
+        });
     }
 
 

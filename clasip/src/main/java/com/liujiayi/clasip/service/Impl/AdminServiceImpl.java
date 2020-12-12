@@ -9,17 +9,14 @@ import com.liujiayi.clasip.dao.TeacherDao;
 import com.liujiayi.clasip.pojo.Class;
 import com.liujiayi.clasip.pojo.Student;
 import com.liujiayi.clasip.pojo.Teacher;
-<<<<<<< HEAD
 import com.liujiayi.clasip.pojo.association.TeacherClass;
-=======
 import com.liujiayi.clasip.pojo.Token;
-import com.liujiayi.clasip.pojo.association.ClassTeacher;
->>>>>>> 3956a2d8c37b31303840609fe1b8ba7acc5c4f74
 import com.liujiayi.clasip.service.AdminService;
 import com.liujiayi.clasip.util.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -85,6 +82,40 @@ public class AdminServiceImpl implements AdminService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public List<Class> getAllClassByTid(String tid) {
+        QueryWrapper<TeacherClass> teacherClassQueryWrapper = new QueryWrapper<>();
+        teacherClassQueryWrapper.eq(Constants.TEACHER_ID,tid);
+        List<TeacherClass> teacherClasses = classTeacherDao.selectList(teacherClassQueryWrapper);
+        ArrayList<Class> classes = new ArrayList<>();
+        for (TeacherClass teacherClass:teacherClasses) {
+            QueryWrapper<Class> classQueryWrapper = new QueryWrapper<>();
+            classQueryWrapper.eq(Constants.CLASS_ID,teacherClass.getCid());
+            Class aClass = classDao.selectOne(classQueryWrapper);
+            classes.add(aClass);
+        }
+        return classes;
+    }
+
+    @Override
+    public Teacher getTeacherByTid(String tid) {
+        Teacher teacher = teacherDao.selectById(tid);
+        return teacher;
+    }
+
+    @Override
+    public int addTeacher(String teacher) {
+        Teacher addTeacher = JSON.parseObject(teacher, Teacher.class);
+        int insert = teacherDao.insert(addTeacher);
+        return insert;
+    }
+
+    @Override
+    public int addClass(String cid, String className) {
+        int insert = classDao.insert(new Class(cid, className));
+        return insert;
     }
 
 

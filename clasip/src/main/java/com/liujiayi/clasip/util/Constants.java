@@ -22,6 +22,7 @@ public class Constants {
     public static final String SUCCESS_MSG = "请求成功";
     public static final String LOGIN_SUCCESS = "登录成功";
     public static final String REGISTER_SUCCESS = "注册成功";
+    public static final String THERE_IS_NOCLASS = "暂时没有课程";
 
     /**
      * 返回信息中的key
@@ -33,4 +34,5 @@ public class Constants {
     public static final String STUDENTS = "students";
     public static final String TEACHER = "teacher";
     public static final String CLASS_INFO = "classInfo";
+    public static final String TEACHER_ID = "tid";
 }

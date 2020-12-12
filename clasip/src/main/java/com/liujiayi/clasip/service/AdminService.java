@@ -51,4 +51,33 @@ public interface AdminService {
      * @return 登录状态
      */
     Boolean login(String token);
+
+    /**
+     * 通过tid获取所有的课程
+     * @param tid 教工号
+     * @return 所有的课程
+     */
+    List<Class> getAllClassByTid(String tid);
+
+    /**
+     * 通过tid获取教师
+     * @param tid 教工号
+     * @return 教师
+     */
+    Teacher getTeacherByTid(String tid);
+
+    /**
+     * 添加教师
+     * @param teacher 教师实体
+     * @return 返回添加状态
+     */
+    int addTeacher(String teacher);
+
+    /**
+     * 添加课程
+     * @param cid 课程码
+     * @param className 课程名
+     */
+    int addClass(String cid, String className);
+
 }

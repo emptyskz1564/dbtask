@@ -39,6 +39,10 @@ public class AdminController {
      */
     @GetMapping("/getAllClass")
     public Object getAllClass(){
+        List<Class> allClass = adminService.getAllClass();
+        if(allClass==null || allClass.isEmpty()){
+            return Result.failure(Constants.SUCCESS_CODE_MSG,Constants.THERE_IS_NOCLASS,allClass);
+        }
         return Result.successs(adminService.getAllClass());
     }
 
@@ -105,4 +109,30 @@ public class AdminController {
         Boolean login = adminService.login(token);
         return login ? Result.successs(Constants.LOGIN_SUCCESS):Result.failure(ErrorEnum.E_401);
     }
+
+    @GetMapping("/getAllClassByTid/{tid}")
+    public Object getAllClassByTid(@PathVariable("tid") String tid){
+        Teacher teacherByTid = adminService.getTeacherByTid(tid);
+        if (teacherByTid == null){
+            return Result.failure(ErrorEnum.E_90004);
+        }
+        List<Class> allClassByTid = adminService.getAllClassByTid(tid);
+        HashMap<String, Object> resultMap = new HashMap<>(2);
+        resultMap.put(Constants.TEACHER,teacherByTid);
+        resultMap.put(Constants.CLASS_INFO,allClassByTid);
+        return Result.successs(resultMap);
+    }
+
+    @PostMapping("/addTeacher")
+    public Object addTeacher(@RequestBody String teacher){
+        int i = adminService.addTeacher(teacher);
+        return i>0 ? Result.successs("添加成功"):Result.failure(ErrorEnum.E_10009);
+    }
+
+    @GetMapping("/addClass/{cid}/{className}")
+    public Object addClass(@PathVariable("cid") String cid,@PathVariable("className") String className){
+        int i = adminService.addClass(cid, className);
+        return i>0 ? Result.successs("添加成功"):Result.failure(ErrorEnum.E_10008);
+    }
+
 }
