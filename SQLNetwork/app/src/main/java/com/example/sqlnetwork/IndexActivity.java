@@ -3,6 +3,7 @@ package com.example.sqlnetwork;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.annotation.Nullable;
@@ -33,11 +34,38 @@ public class IndexActivity extends AppCompatActivity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_index);
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
+
+        Button bt2 = findViewById(R.id.buttonSelect);
+        bt2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent1 = new Intent(IndexActivity.this,lookMyCourseActivity.class);
+                intent1.putExtra("sid",sid);
+                startActivity(intent1);
+            }
+        });
+
+        Button bt3 = findViewById(R.id.buttonQiandao);
+        bt3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                
+            }
+        });
+
+
         sid = intent.getStringExtra("sid");
         System.out.println(sid);
         initView();
         new init(sid).run();
+
+
+
+
+
+
+
     }
 
     public void initView(){
@@ -54,6 +82,8 @@ public class IndexActivity extends AppCompatActivity {
             }
         });
         view.setAdapter(adapter);
+
+
     }
 
     public void updateUI(final ClassResult classResult){

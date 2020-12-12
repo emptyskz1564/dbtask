@@ -1,4 +1,4 @@
-package com.liujiayi.clasip.util;
+package com.example.sqlnetwork.util;
 
 
 /**

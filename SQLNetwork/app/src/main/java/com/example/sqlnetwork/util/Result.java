@@ -1,4 +1,4 @@
-package com.hailicy.androidqimo3.utils;
+package com.example.sqlnetwork.util;
 
 
 
