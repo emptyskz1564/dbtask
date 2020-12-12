@@ -49,8 +49,10 @@ public class GetClassListAdapter extends RecyclerView.Adapter<GetClassListAdapte
 
     public void setData(ClassResult classResult) {
         data.clear();
-        data.addAll(classResult.getData());
-        notifyDataSetChanged();
+        if(classResult.getData()!=null){
+            data.addAll(classResult.getData());
+            notifyDataSetChanged();
+        }
     }
 
     public List<ClassResult.Class> getData() {

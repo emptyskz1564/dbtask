@@ -111,7 +111,6 @@ public class StudentServiceImpl implements StudentService {
                 result.add(signUp);
             }
         }
-
         return result;
     }
 

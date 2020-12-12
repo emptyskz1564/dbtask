@@ -86,7 +86,7 @@ public class IndexActivity extends AppCompatActivity {
                 public void onResponse(Response response) throws IOException {
                     ResponseBody body = response.body();
                     Gson gson = CommonUtil.getGson();
-                    ClassResult classResult = gson.fromJson(body.toString(), ClassResult.class);
+                    ClassResult classResult = gson.fromJson(body.string(), ClassResult.class);
                     updateUI(classResult);
                 }
             });
