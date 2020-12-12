@@ -8,13 +8,16 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.sqlnetwork.domain.CommonResult;
 import com.example.sqlnetwork.domain.Token;
 import com.example.sqlnetwork.util.CommonUtil;
 import com.example.sqlnetwork.util.UrlEnum;
+import com.google.gson.Gson;
 import com.squareup.okhttp.Call;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
+import com.squareup.okhttp.ResponseBody;
 
 import java.io.IOException;
 
@@ -51,11 +54,18 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(Response response) throws IOException {
                 if (response.code() == 200){
-                    System.out.println("登录成功");
-                    Intent intent = new Intent(LoginActivity.this, IndexActivity.class);
-                    intent.putExtra("sid",sid.getText().toString());
-
-                    startActivity(intent);
+                    System.out.println("请求成功");
+                    ResponseBody body = response.body();
+                    Gson gson = CommonUtil.getGson();
+                    CommonResult commonResult = gson.fromJson(body.string(), CommonResult.class);
+                    if("200".equals(commonResult.getCode())){
+                        System.out.println("登录成功");
+                        Intent intent = new Intent(LoginActivity.this, IndexActivity.class);
+                        intent.putExtra("sid",sid.getText().toString());
+                        startActivity(intent);
+                    } else {
+                        System.out.println("登录失败");
+                    }
 
                 } else {
                     System.out.println("密码或学号错误");
