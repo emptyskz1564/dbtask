@@ -1,4 +1,4 @@
-package com.example.sqlnetwork.util;
+package com.hailicy.signteacher.util;
 import com.google.gson.Gson;
 import com.squareup.okhttp.MediaType;
 import com.squareup.okhttp.OkHttpClient;

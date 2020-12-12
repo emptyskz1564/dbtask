@@ -14,10 +14,13 @@ import org.springframework.stereotype.Repository;
 @Setter
 @ToString
 @AllArgsConstructor
-@NoArgsConstructor
+//@NoArgsConstructor
 @Repository
 @TableName("StudentClass")
 public class ClassStudent {
     private String cid;
     private String sid;
+
+    public ClassStudent() {
+    }
 }

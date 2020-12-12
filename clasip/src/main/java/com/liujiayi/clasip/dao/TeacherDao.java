@@ -3,6 +3,8 @@ package com.liujiayi.clasip.dao;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.liujiayi.clasip.pojo.Teacher;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -14,4 +16,8 @@ import org.springframework.stereotype.Repository;
 @Mapper
 @Repository
 public interface TeacherDao extends BaseMapper<Teacher> {
+
+    @Select("select * from Teacher wher tid=#{tid} and pwd=#{pwd}")
+    public Teacher tealogin(@Param("tid")String tid,@Param("pwd")String pwd);
+
 }
