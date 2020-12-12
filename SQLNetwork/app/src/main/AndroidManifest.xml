@@ -22,7 +22,7 @@
         <activity android:name=".IndexActivity">
         </activity>
 
-        <activity android:name=".OkhttpActivity">
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
