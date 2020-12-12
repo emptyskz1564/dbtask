@@ -32,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_login);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);// 填充标题栏
+//        requestWindowFeature(Window.FEATURE_NO_TITLE);// 填充标题栏
         setContentView(R.layout.activity_login);
         sid = findViewById(R.id.login_sid);
         pwd = findViewById(R.id.login_pwd);
