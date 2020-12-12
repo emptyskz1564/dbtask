@@ -33,19 +33,19 @@ public class Result {
     }
 
     public static Result successs2(Object data){
-        return new Result(com.liujiayi.clasip.util.Constants.SUCCESS_CODE, com.liujiayi.clasip.util.Constants.SUCCESS_MSG,data);
+        return new Result(Constants.SUCCESS_CODE,Constants.SUCCESS_MSG,data);
     }
 
     public static Result success(){
-        return new Result(com.liujiayi.clasip.util.Constants.SUCCESS_CODE, com.liujiayi.clasip.util.Constants.SUCCESS_MSG,null);
+        return new Result(Constants.SUCCESS_CODE, Constants.SUCCESS_MSG,null);
     }
 
     public static Result successs(String msg){
-        return new Result(com.liujiayi.clasip.util.Constants.SUCCESS_CODE,msg,null);
+        return new Result(Constants.SUCCESS_CODE,msg,null);
     }
 
     public static Result successs(Object data){
-        return new Result(com.liujiayi.clasip.util.Constants.SUCCESS_CODE, com.liujiayi.clasip.util.Constants.SUCCESS_MSG,data);
+        return new Result(Constants.SUCCESS_CODE, Constants.SUCCESS_MSG,data);
     }
 
     public static Result  failure(String code,String msg){
@@ -56,7 +56,7 @@ public class Result {
         return new Result(code,msg,data);
     }
 
-    public static Result failure(com.liujiayi.clasip.util.ErrorEnum errorEnum){
+    public static Result failure(ErrorEnum errorEnum){
         return new Result(errorEnum.getErrorCode(),errorEnum.getErrorMsg(),null);
     }
 
@@ -69,7 +69,7 @@ public class Result {
                 '}';
     }
 
-    public static Result failure(com.liujiayi.clasip.util.ErrorEnum errorEnum, Object data){
+    public static Result failure(ErrorEnum errorEnum, Object data){
         return new Result(errorEnum.getErrorCode(),errorEnum.getErrorMsg(),data);
     }
 

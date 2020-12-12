@@ -31,7 +31,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<<<<<<< HEAD
 
         <activity android:name=".ClassInfoActivity">
             <intent-filter>
@@ -39,8 +38,7 @@
             </intent-filter>
         </activity>
 
-=======
->>>>>>> 37c3a4d588e083adcedbcb61fda7221ed7690e97
+
     </application>
 
 </manifest>

@@ -95,7 +95,7 @@ public class ClassInfoActivity extends AppCompatActivity {
 
                 @Override
                 public void onResponse(Response response) throws IOException {
-                    
+
                 }
             });
         }
