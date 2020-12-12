@@ -1,5 +1,4 @@
-package com.hailicy.androidqimo3.utils
-
+package com.example.sqlnetwork.util;
 import com.google.gson.Gson;
 import com.squareup.okhttp.MediaType;
 import com.squareup.okhttp.OkHttpClient;
