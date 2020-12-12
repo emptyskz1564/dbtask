@@ -58,7 +58,7 @@
         android:id="@+id/imageView"
         android:layout_width="422dp"
         android:layout_height="88dp"
-        android:background="#61813C"
+        android:background="#396CC6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

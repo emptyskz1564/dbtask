@@ -3,6 +3,7 @@ package com.example.sqlnetwork;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -30,8 +31,9 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_login);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);// 填充标题栏
         setContentView(R.layout.activity_login);
-
         sid = findViewById(R.id.login_sid);
         pwd = findViewById(R.id.login_pwd);
         login = findViewById(R.id.login);
