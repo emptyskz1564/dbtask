@@ -1,8 +1,4 @@
 package com.example.sqlnetwork.util;
-<<<<<<< HEAD
-
-=======
->>>>>>> cc03ff47d42d0e258f748532cb1fcb06a0477adc
 import com.google.gson.Gson;
 import com.squareup.okhttp.MediaType;
 import com.squareup.okhttp.OkHttpClient;

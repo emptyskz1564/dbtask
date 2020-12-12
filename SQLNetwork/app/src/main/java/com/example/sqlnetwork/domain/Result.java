@@ -9,14 +9,14 @@ public class Result {
     private List<Student> data;
 
     public class Student {
-        private Integer sid;
+        private String sid;
         private String pwd;
         private String name;
         private String major;
         private String className;
         private String grade;
 
-        public Student(Integer sid, String pwd, String name, String major, String className, String grade) {
+        public Student(String sid, String pwd, String name, String major, String className, String grade) {
             this.sid = sid;
             this.pwd = pwd;
             this.name = name;
@@ -37,11 +37,11 @@ public class Result {
                     '}';
         }
 
-        public Integer getSid() {
+        public String getSid() {
             return sid;
         }
 
-        public void setSid(Integer sid) {
+        public void setSid(String sid) {
             this.sid = sid;
         }
 

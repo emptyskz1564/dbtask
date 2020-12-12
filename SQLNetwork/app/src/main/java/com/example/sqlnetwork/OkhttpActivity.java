@@ -7,6 +7,8 @@ import android.widget.Button;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.example.sqlnetwork.domain.Result;
 import com.example.sqlnetwork.util.CommonUtil;
 import com.google.gson.Gson;
@@ -36,7 +38,7 @@ public class OkhttpActivity extends AppCompatActivity {
         //创建客户端
         OkHttpClient okHttpClient = CommonUtil.getClient();
         //创建请求
-        Request request = CommonUtil.getRequest("http://10.0.2.2:8080/allstudents");
+        Request request = CommonUtil.getRequest("https://hailicy.xyz/clasip/allstudents");
         //创建请求任务
         Call call = okHttpClient.newCall(request);
         //异步请求
@@ -50,7 +52,7 @@ public class OkhttpActivity extends AppCompatActivity {
             public void onResponse(Response response) throws IOException {
                 ResponseBody body = response.body();
                 Gson gson = CommonUtil.getGson();
-                Result result = gson.fromJson(body.toString(), Result.class);
+                Result result = gson.fromJson(body.string(), Result.class);
                 List<Result.Student> students = result.getData();
                 for (Result.Student student : students) {
                     System.out.println(students.toString());

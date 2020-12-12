@@ -110,7 +110,7 @@ public class IndexActivity extends AppCompatActivity {
             public void onResponse(Response response) throws IOException {
                 ResponseBody body = response.body();
                 Gson gson = CommonUtil.getGson();
-                CommonResult commonResult = gson.fromJson(body.toString(), CommonResult.class);
+                CommonResult commonResult = gson.fromJson(body.string(), CommonResult.class);
                 if("200".equals(commonResult.getCode())){
                     new init(sid).run();
                 }
