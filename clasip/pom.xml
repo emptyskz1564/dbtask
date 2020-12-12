@@ -18,7 +18,16 @@
 
     <dependencies>
 
-<!--        <dependency>-->
+<!--        csvReader-->
+        <!-- https://mvnrepository.com/artifact/org.jumpmind.symmetric/symmetric-csv -->
+        <dependency>
+            <groupId>org.jumpmind.symmetric</groupId>
+            <artifactId>symmetric-csv</artifactId>
+            <version>3.5.19</version>
+        </dependency>
+
+
+        <!--        <dependency>-->
 <!--            <groupId>javax.servlet</groupId>-->
 <!--            <artifactId>javax.servlet-api</artifactId>-->
 <!--            <version>3.0.1</version>-->
@@ -89,7 +98,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
+            <scope>compile</scope>
             <exclusions>
                 <exclusion>
                     <groupId>org.junit.vintage</groupId>

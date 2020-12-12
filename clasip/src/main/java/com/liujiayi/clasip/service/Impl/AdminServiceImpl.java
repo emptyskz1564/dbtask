@@ -9,8 +9,17 @@ import com.liujiayi.clasip.dao.TeacherDao;
 import com.liujiayi.clasip.pojo.Class;
 import com.liujiayi.clasip.pojo.Student;
 import com.liujiayi.clasip.pojo.Teacher;
+<<<<<<< HEAD
 import com.liujiayi.clasip.pojo.association.TeacherClass;
 import com.liujiayi.clasip.pojo.Token;
+=======
+//<<<<<<< HEAD
+import com.liujiayi.clasip.pojo.association.TeacherClass;
+//=======
+import com.liujiayi.clasip.pojo.Token;
+//import com.liujiayi.clasip.pojo.association.ClassTeacher;
+//>>>>>>> 3956a2d8c37b31303840609fe1b8ba7acc5c4f74
+>>>>>>> cc03ff47d42d0e258f748532cb1fcb06a0477adc
 import com.liujiayi.clasip.service.AdminService;
 import com.liujiayi.clasip.util.Constants;
 import org.springframework.beans.factory.annotation.Autowired;

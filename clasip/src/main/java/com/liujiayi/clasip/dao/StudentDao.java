@@ -3,7 +3,10 @@ package com.liujiayi.clasip.dao;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.liujiayi.clasip.pojo.Student;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * 创建时间: 2020-10-12 17:07
@@ -15,5 +18,7 @@ import org.springframework.stereotype.Repository;
 @Mapper
 public interface StudentDao extends BaseMapper<Student> {
 
+    @Select("select sid from Student")
+    public List<String> selectSid();
 
 }
