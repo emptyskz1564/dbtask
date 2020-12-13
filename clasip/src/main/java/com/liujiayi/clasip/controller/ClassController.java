@@ -1,8 +1,10 @@
 package com.liujiayi.clasip.controller;
 
 import com.liujiayi.clasip.dao.ClassDao;
+import com.liujiayi.clasip.dao.ClassStudentDao;
 import com.liujiayi.clasip.pojo.Class;
 import com.liujiayi.clasip.pojo.Student;
+import com.liujiayi.clasip.pojo.association.ClassStudent;
 import com.liujiayi.clasip.util.ErrorEnum;
 import com.liujiayi.clasip.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,9 @@ public class ClassController {
 
     @Autowired
     ClassDao classDao;
+
+    @Autowired
+    ClassStudentDao classStudentDao;
 
     //搜索接口
     @ResponseBody
@@ -50,5 +55,30 @@ public class ClassController {
             return Result.successs2(studentList);
         }
     }
+
+    //传入cid返回所有学生
+    @ResponseBody
+    @GetMapping("/cidToAllStus2/{cid}")
+    public Object getAll2(@PathVariable("cid")String cid){
+        List<Student> studentList = classDao.cidToStus(cid);
+        if(studentList.size()==0){
+            return Result.failure(ErrorEnum.E_90004);
+        }else{
+            return Result.successs2(studentList);
+        }
+    }
+
+
+
+
+
+    //测试接口
+    @ResponseBody
+    @GetMapping("/test2/{sid}/{cid}")
+    public Object test2(@PathVariable("sid") String sid,@PathVariable("cid") String cid){
+        //classStudentDao.insert(new ClassStudent(sid,cid));
+        return Result.successs2(new ClassStudent(sid,cid));
+    }
+
 
 }

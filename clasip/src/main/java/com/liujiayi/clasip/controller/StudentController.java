@@ -1,15 +1,18 @@
 package com.liujiayi.clasip.controller;
 
+import com.liujiayi.clasip.dao.ClassStudentDao;
 import com.liujiayi.clasip.dao.StudentDao;
 import com.liujiayi.clasip.pojo.Class;
 import com.liujiayi.clasip.pojo.SignUp;
 import com.liujiayi.clasip.pojo.Student;
+import com.liujiayi.clasip.pojo.association.ClassStudent;
 import com.liujiayi.clasip.pojo.association.OpenClass;
 import com.liujiayi.clasip.service.StudentService;
 import com.liujiayi.clasip.util.Constants;
 import com.liujiayi.clasip.util.ErrorEnum;
 import com.liujiayi.clasip.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -20,7 +23,7 @@ import java.util.Vector;
  * @author 刘斯昊
  * @date 2020/10/15
  */
-@RestController
+@Controller
 @RequestMapping("/student")
 public class StudentController {
 
@@ -31,12 +34,17 @@ public class StudentController {
     @Autowired
     StudentDao studentDao;
 
+    @Autowired
+    ClassStudentDao classStudentDao;
+
 
     /**
      * 登录方法，post请求，接受前端传来的token
      * @param token   学生账号密码
      * @return 返回登录信息
      */
+
+    @ResponseBody
     @PostMapping("/login")
     public Object login(@RequestBody String token){
         boolean code = studentService.login(token);
@@ -52,6 +60,7 @@ public class StudentController {
      * @param studentInfo 学生信息
      * @return 返回注册信息
      */
+    @ResponseBody
     @PostMapping("/register")
     public Object register(@RequestBody String studentInfo){
         System.out.println(studentInfo);
@@ -69,6 +78,7 @@ public class StudentController {
      * @param sid   学号
      * @return  学生信息
      */
+    @ResponseBody
     @GetMapping("/getStudentBySid/{sid}")
     public Object getStudentBySid(@PathVariable("sid") String sid){
         Student studentBySid = studentService.getStudentBySid(sid);
@@ -80,6 +90,7 @@ public class StudentController {
      * @param cid 课程id
      * @return  某课堂的所有学生信息
      */
+    @ResponseBody
     @GetMapping("getAllStudentByCid/{cid}")
     public Object getAllStudentByCid(@PathVariable("cid") String cid){
         List<Student> allStudentByCid = studentService.getAllStudentByCid(cid);
@@ -92,6 +103,8 @@ public class StudentController {
      * @param cid     课程号
      * @return  加入课程消息
      */
+
+    @ResponseBody
     @GetMapping("/addStudentToClass/{sid}/{cid}")
     public Object addStudentToClass(@PathVariable("sid") String sid,@PathVariable("cid") String cid){
         boolean code = studentService.addStudentToClass(sid, cid);
@@ -102,11 +115,17 @@ public class StudentController {
         }
     }
 
+
+
+
+
+
     /**
      * 获取某学生的所有课程
      * @param sid   学号
      * @return  所有课程列表
      */
+    @ResponseBody
     @GetMapping("/getAllClassBySid/{sid}")
     public Object getAllClassBySid(@PathVariable("sid") String sid){
         List<Class> allClass = studentService.getAllClassBySid(sid);
@@ -118,6 +137,7 @@ public class StudentController {
      * @param cid   课程id
      * @return  课程信息
      */
+    @ResponseBody
     @GetMapping("/getClassInfoByCid/{cid}")
     public Object getClassInfoByCid(@PathVariable("cid") String cid){
         Class classByCid = studentService.getClassByCid(cid);
@@ -126,7 +146,7 @@ public class StudentController {
 
 
 
-
+    @ResponseBody
     @GetMapping("/signUp/{sid}/{cid}/{version}/{lng}/{lat}")
     public Object signUp(@PathVariable("sid") String sid, @PathVariable("cid") String cid, @PathVariable("version")Integer version,@PathVariable("lng")Double lng,@PathVariable("lat")Double lat){
         SignUp signUp = new SignUp(sid,cid,version,LocalDateTime.now(),lng,lat);
@@ -134,13 +154,14 @@ public class StudentController {
         return b?Result.successs("签到成功"):Result.failure("203","签到失败");
     }
 
+    @ResponseBody
     @GetMapping("getSign/{cid}")
     public Object getSign(@PathVariable("cid") String cid){
         List<OpenClass> sign = studentService.getSign(cid);
         return Result.successs(sign);
     }
 
-
+    @ResponseBody
     @GetMapping("/delete/{sid}/{cid}")
     public Object delete(@PathVariable("sid") String sid,@PathVariable("cid") String cid){
         studentDao.tuike(sid,cid);

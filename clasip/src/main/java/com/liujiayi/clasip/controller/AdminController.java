@@ -1,9 +1,11 @@
 package com.liujiayi.clasip.controller;
 
 import com.liujiayi.clasip.dao.ClassDao;
+import com.liujiayi.clasip.dao.ClassStudentDao;
 import com.liujiayi.clasip.pojo.Class;
 import com.liujiayi.clasip.pojo.Student;
 import com.liujiayi.clasip.pojo.Teacher;
+import com.liujiayi.clasip.pojo.association.ClassStudent;
 import com.liujiayi.clasip.service.AdminService;
 import com.liujiayi.clasip.service.StudentService;
 import com.liujiayi.clasip.service.TeacherService;
@@ -36,6 +38,9 @@ public class AdminController {
 
     @Autowired
     ClassDao classDao;
+
+    @Autowired
+    ClassStudentDao classStudentDao;
 
     /**
      * 获取所有课程
@@ -141,6 +146,19 @@ public class AdminController {
         int i = adminService.addTeacher(teacher);
         return i>0 ? Result.successs("添加成功"):Result.failure(ErrorEnum.E_10009);
     }
+
+
+    //仿照这个
+    @CrossOrigin(origins = "*", maxAge = 3600)
+    @GetMapping("/addStudentToClass4/{sid}/{cid}")
+    public Object addStudentToClass4(@PathVariable("sid") String sid,@PathVariable("cid") String cid){
+        classStudentDao.insert(new ClassStudent(sid,cid));
+        return Result.successs("加入课程成功！");
+    }
+
+
+
+
 //    String cid;
 //    String className;
 //    String teacher;

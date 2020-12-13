@@ -18,8 +18,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 @TableName("StudentClass")
 public class ClassStudent {
-    private String cid;
     private String sid;
+    private String cid;
 
     public ClassStudent() {
     }
