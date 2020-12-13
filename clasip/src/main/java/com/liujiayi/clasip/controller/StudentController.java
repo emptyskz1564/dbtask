@@ -26,6 +26,7 @@ public class StudentController {
     @Autowired
     StudentService studentService;
 
+
     /**
      * 登录方法，post请求，接受前端传来的token
      * @param token   学生账号密码
@@ -117,6 +118,9 @@ public class StudentController {
         Class classByCid = studentService.getClassByCid(cid);
         return Result.successs(classByCid);
     }
+
+
+
 
     @GetMapping("/signUp/{sid}/{cid}/{version}/{lng}/{lat}")
     public Object signUp(@PathVariable("sid") String sid, @PathVariable("cid") String cid, @PathVariable("version")Integer version,@PathVariable("lng")Double lng,@PathVariable("lat")Double lat){
