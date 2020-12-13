@@ -24,4 +24,13 @@ import java.util.List;
 public class Class implements Serializable {
     String cid;
     String className;
+<<<<<<< HEAD
+=======
+    String teacher;
+    String time;
+    String info;
+
+//    public Class() {
+//    }
+>>>>>>> 4bd44049fa2855ce9f8491a3bacb924267a20dd9
 }

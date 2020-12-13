@@ -114,7 +114,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public int addClass(String cid, String className) {
-        int insert = classDao.insert(new Class(cid, className));
+        int insert = classDao.insert(new Class(cid, className,null,null,null));
         return insert;
     }
 
