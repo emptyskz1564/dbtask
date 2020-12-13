@@ -2,6 +2,7 @@ package com.liujiayi.clasip.controller;
 
 import com.liujiayi.clasip.dao.ClassDao;
 import com.liujiayi.clasip.pojo.Class;
+import com.liujiayi.clasip.pojo.Student;
 import com.liujiayi.clasip.util.ErrorEnum;
 import com.liujiayi.clasip.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,19 @@ public class ClassController {
             return Result.successs2(classList);
         }
 //        return classList;
+    }
+
+
+    //传入cid返回所有学生
+    @ResponseBody
+    @GetMapping("/cidToAllStus/{cid}")
+    public Object getAll(@PathVariable("cid")String cid){
+        List<Student> studentList = classDao.cidToStus(cid);
+        if(studentList.size()==0){
+            return Result.failure(ErrorEnum.E_90004);
+        }else{
+            return Result.successs2(studentList);
+        }
     }
 
 }
