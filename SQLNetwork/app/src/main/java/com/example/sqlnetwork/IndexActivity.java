@@ -120,7 +120,8 @@ public class IndexActivity extends AppCompatActivity {
     public void addClass(View view){
         EditText editText = findViewById(R.id.Class_Code);
         String classCode = editText.getText().toString();
-        Request request = CommonUtil.getRequest(UrlEnum.ADD_TO_CLASS + sid + "/" + classCode);
+        System.out.println(UrlEnum.ADD_TO_CLASS.getUrl() + sid + "/" + classCode);
+        final Request request = CommonUtil.getRequest(UrlEnum.ADD_TO_CLASS.getUrl() + sid + "/" + classCode);
         Call call = CommonUtil.getClient().newCall(request);
         call.enqueue(new Callback() {
             @Override
@@ -130,12 +131,34 @@ public class IndexActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Response response) throws IOException {
-                ResponseBody body = response.body();
-                Gson gson = CommonUtil.getGson();
-                CommonResult commonResult = gson.fromJson(body.string(), CommonResult.class);
-                if("200".equals(commonResult.getCode())){
-                    new init(sid).run();
+                if (response.code() != 200){
+                    System.out.println("请求失败");
+                    System.out.println(response.body().string());
+                } else {
+                    ResponseBody body = response.body();
+                    Gson gson = CommonUtil.getGson();
+                    CommonResult commonResult = gson.fromJson(body.string(), CommonResult.class);
+                    if("200".equals(commonResult.getCode())){
+                        System.out.println("添加成功");
+                        Request request = CommonUtil.getRequest(UrlEnum.ALL_CLASSES_BY_SID.getUrl() + sid);
+                        Call call = CommonUtil.getClient().newCall(request);
+                        call.enqueue(new Callback() {
+                            @Override
+                            public void onFailure(Request request, IOException e) {
+                                e.printStackTrace();
+                            }
+
+                            @Override
+                            public void onResponse(Response response) throws IOException {
+                                ResponseBody body = response.body();
+                                Gson gson = CommonUtil.getGson();
+                                ClassResult classResult = gson.fromJson(body.string(), ClassResult.class);
+                                updateUI(classResult);
+                            }
+                        });
+                    }
                 }
+
             }
         });
     }

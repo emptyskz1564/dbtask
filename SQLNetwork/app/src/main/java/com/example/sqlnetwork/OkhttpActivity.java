@@ -61,6 +61,7 @@ public class OkhttpActivity extends AppCompatActivity {
             public void onResponse(Response response) throws IOException {
                 ResponseBody body = response.body();
                 Gson gson = CommonUtil.getGson();
+                System.out.println(body.string());
                 Result result = gson.fromJson(body.string(), Result.class);
                 List<Result.Student> students = result.getData();
                 for (Result.Student student : students) {
