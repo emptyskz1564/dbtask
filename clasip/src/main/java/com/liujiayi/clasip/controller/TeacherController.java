@@ -1,11 +1,14 @@
 package com.liujiayi.clasip.controller;
 
 import com.liujiayi.clasip.dao.TeacherDao;
+import com.liujiayi.clasip.pojo.Class;
 import com.liujiayi.clasip.pojo.Teacher;
 import com.liujiayi.clasip.util.ErrorEnum;
 import com.liujiayi.clasip.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author 刘斯昊
@@ -16,6 +19,7 @@ public class TeacherController {
 
     @Autowired
     TeacherDao teacherDao;
+
 
     @ResponseBody
     @PostMapping("teacherlogin/{tid}/{pwd}")
@@ -28,6 +32,9 @@ public class TeacherController {
         }
 
     }
+
+
+
 
 
 
