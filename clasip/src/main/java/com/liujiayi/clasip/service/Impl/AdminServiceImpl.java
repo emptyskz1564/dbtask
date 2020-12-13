@@ -113,8 +113,9 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public int addClass(String cid, String className) {
-        int insert = classDao.insert(new Class(cid, className,null,null,null));
+    public int addClass(String addClass) {
+        Class aClass = JSON.parseObject(addClass, Class.class);
+        int insert = classDao.insert(aClass);
         return insert;
     }
 

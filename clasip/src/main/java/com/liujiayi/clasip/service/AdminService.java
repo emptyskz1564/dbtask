@@ -75,9 +75,9 @@ public interface AdminService {
 
     /**
      * 添加课程
-     * @param cid 课程码
-     * @param className 课程名
+     * @param addClass 课程对象
+     * @return 返回添加状态
      */
-    int addClass(String cid, String className);
+    int addClass(String addClass);
 
 }

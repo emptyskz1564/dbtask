@@ -130,10 +130,11 @@ public class AdminController {
         return i>0 ? Result.successs("添加成功"):Result.failure(ErrorEnum.E_10009);
     }
 
-    @GetMapping("/addClass/{cid}/{className}")
-    public Object addClass(@PathVariable("cid") String cid,@PathVariable("className") String className){
-        int i = adminService.addClass(cid, className);
-        return i>0 ? Result.successs("添加成功"):Result.failure(ErrorEnum.E_10008);
+
+    @PostMapping ("/addClass")
+    public Object addClass(@RequestBody String addClass){
+        int i = adminService.addClass(addClass);
+        return i>0 ? Result.successs("添加成功"):Result.failure(ErrorEnum.E_10009);
     }
 
 }
