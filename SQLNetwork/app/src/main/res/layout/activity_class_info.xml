@@ -61,6 +61,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
+        android:onClick="sign"
         android:text="签到"
         app:layout_constraintBaseline_toBaselineOf="@+id/SignCode_ClassInfo"
         app:layout_constraintEnd_toEndOf="parent"

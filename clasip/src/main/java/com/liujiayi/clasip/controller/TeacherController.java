@@ -32,7 +32,7 @@ public class TeacherController {
 
 
     @ResponseBody
-    @PostMapping("teacherlogin/{tid}/{pwd}")
+    @GetMapping("teacherlogin/{tid}/{pwd}")
     public Object teaLogin(@PathVariable("tid")String tid,@PathVariable("pwd")String pwd){
         Teacher teacher = teacherDao.tealogin(tid,pwd);
         if(teacher.getTid().equals(tid)){
@@ -68,10 +68,6 @@ public class TeacherController {
         openClassDao.insert(openClass);
         return Result.successs2(version);
     }
-
-
-
-
 
 
 

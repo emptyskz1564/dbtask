@@ -7,6 +7,7 @@ public enum UrlEnum {
     STUDENT_INFO("获取个人信息",""),
     ADD_TO_CLASS("加入课程链接","https://hailicy.xyz/clasip/addStudentToClass/"),
     LOGIN("登录链接","https://hailicy.xyz/clasip/student/login"),
+    TEACHER_LOGIN("教师登录","https://hailicy.xyz/clasip/teacher/teacherlogin/"),
     GET_CLASS_BY_CID("获取单个课程信息","https://hailicy.xyz/clasip/getClassInfoByCid/");
 
     private String msg;
