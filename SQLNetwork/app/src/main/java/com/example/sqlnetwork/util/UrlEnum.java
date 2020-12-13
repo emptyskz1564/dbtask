@@ -5,7 +5,7 @@ public enum UrlEnum {
     REGISTER("注册链接","https://hailicy.xyz/clasip/student/register"),
     ALL_CLASSES_BY_SID("获取全部课程链接","https://hailicy.xyz/clasip/student/getAllClassBySid/"),
     STUDENT_INFO("获取个人信息",""),
-    ADD_TO_CLASS("加入课程链接","https://hailicy.xyz/clasip/addStudentToClass/"),
+    ADD_TO_CLASS("加入课程链接","https://hailicy.xyz/clasip/addStudentToClass3/"),
     LOGIN("登录链接","https://hailicy.xyz/clasip/student/login"),
     TEACHER_LOGIN("教师登录","https://hailicy.xyz/clasip/teacher/teacherlogin/"),
     ALL_CLASS_BY_TID("老师获取所有课程","https://hailicy.xyz/clasip/admin/getAllClassByTid/"),

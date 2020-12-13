@@ -43,8 +43,8 @@ public class LoginActivity extends AppCompatActivity {
         Token token = new Token(sid.getText().toString(), pwd.getText().toString());
 
         String json = CommonUtil.getGson().toJson(token);
-
-        Request request = CommonUtil.postRequest(UrlEnum.LOGIN.getUrl(), json);
+        System.out.println(json);
+        final Request request = CommonUtil.postRequest(UrlEnum.LOGIN.getUrl(), json);
 
         Call call = CommonUtil.getClient().newCall(request);
         call.enqueue(new Callback() {
@@ -67,10 +67,12 @@ public class LoginActivity extends AppCompatActivity {
                         startActivity(intent);
                     } else {
                         System.out.println("登录失败");
+                        System.out.println(commonResult.toString());
                     }
 
                 } else {
-                    System.out.println("密码或学号错误");
+                    System.out.println("请求失败");
+                    System.out.println(response.body().string());
                 }
             }
         });

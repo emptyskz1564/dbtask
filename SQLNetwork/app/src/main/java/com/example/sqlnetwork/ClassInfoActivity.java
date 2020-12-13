@@ -73,14 +73,19 @@ public class ClassInfoActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Response response) throws IOException {
                     ResponseBody body = response.body();
-                    AClassResult classResult = CommonUtil.getGson().fromJson(body.toString(), AClassResult.class);
+                    if(response.code() == 200){
+                        AClassResult classResult = CommonUtil.getGson().fromJson(body.toString(), AClassResult.class);
 
-                    if(classResult.getCode().equals("200")){
-                        TextView className = findViewById(R.id.ClassName_ClassInfo);
-                        TextView classCode = findViewById(R.id.ClassCode_ClassInfo);
-                        className.setText(classResult.getaClass().getClassName());
-                        classCode.setText(classResult.getaClass().getCid());
+                        if(classResult.getCode().equals("200")){
+                            TextView className = findViewById(R.id.ClassName_ClassInfo);
+                            TextView classCode = findViewById(R.id.ClassCode_ClassInfo);
+                            className.setText(classResult.getaClass().getClassName());
+                            classCode.setText(classResult.getaClass().getCid());
+                        }
+
                     }
+
+
                 }
             });
 
@@ -99,7 +104,7 @@ public class ClassInfoActivity extends AppCompatActivity {
                         ResponseBody body = response.body();
                         Gson gson = CommonUtil.getGson();
                         SignResult signResult = gson.fromJson(body.string(), SignResult.class);
-                        if("200".equals(signResult.getCode()) && signResult.getData() != null){
+                        if("200".equals(signResult.getCode()) && signResult.getData() != null && signResult.getData().size() != 0){
                             sign = signResult.getData().get(0);
                             TextView msg = findViewById(R.id.msg_ClassInfo);
                             msg.setText("您有一条正在进行的签到，发起时间:" + signResult.getData().get(0).getStart_time());
