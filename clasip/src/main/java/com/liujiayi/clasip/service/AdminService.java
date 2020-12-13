@@ -71,13 +71,13 @@ public interface AdminService {
      * @param teacher 教师实体
      * @return 返回添加状态
      */
-    int addTeacher(String teacher);
+    int addTeacher(Teacher teacher);
 
     /**
      * 添加课程
      * @param addClass 课程对象
      * @return 返回添加状态
      */
-    int addClass(String addClass);
+    int addClass(Class addClass);
 
 }

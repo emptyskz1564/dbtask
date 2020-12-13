@@ -114,10 +114,12 @@ public class AdminController {
         return i>0 ? Result.successs("删除成功"):Result.failure(ErrorEnum.E_90004);
     }
 
-    @PostMapping("/login")
-    public Object login(@RequestBody String token){
-        Boolean login = adminService.login(token);
-        return login ? Result.successs(Constants.LOGIN_SUCCESS):Result.failure(ErrorEnum.E_401);
+    @GetMapping("/login/{id}/{pwd}")
+    public Object login(@PathVariable("id") String id,@PathVariable("pwd") String pwd){
+        if("admin".equals(id)&&"admin".equals(pwd)){
+            return Result.successs(Constants.LOGIN_SUCCESS);
+        }
+        return Result.failure(ErrorEnum.E_401);
     }
 
     @GetMapping("/getAllClassByTid/{tid}")
@@ -133,16 +135,22 @@ public class AdminController {
         return Result.successs(resultMap);
     }
 
-    @PostMapping("/addTeacher")
-    public Object addTeacher(@RequestBody String teacher){
+    @GetMapping("/addTeacher/{tid}/{name}/{pwd}/{info}")
+    public Object addTeacher(@PathVariable("tid")String tid,@PathVariable("name")String name,@PathVariable("pwd")String pwd,@PathVariable("info")String info){
+        Teacher teacher = new Teacher(tid, name, pwd, info);
         int i = adminService.addTeacher(teacher);
         return i>0 ? Result.successs("添加成功"):Result.failure(ErrorEnum.E_10009);
     }
+//    String cid;
+//    String className;
+//    String teacher;
+//    String time;
+//    String info;
 
-
-    @PostMapping ("/addClass")
-    public Object addClass(@RequestBody String addClass){
-        int i = adminService.addClass(addClass);
+    @GetMapping ("/addClass/{cid}/{className}/{teacher}/{time}/{info}")
+    public Object addClass(@PathVariable("cid")String cid,@PathVariable("className")String className,@PathVariable("teacher")String teacher,@PathVariable("time")String time,@PathVariable("info")String info){
+        Class aClass = new Class(cid, className, teacher, time, info);
+        int i = adminService.addClass(aClass);
         return i>0 ? Result.successs("添加成功"):Result.failure(ErrorEnum.E_10009);
     }
 

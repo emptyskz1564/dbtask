@@ -108,16 +108,14 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public int addTeacher(String teacher) {
-        Teacher addTeacher = JSON.parseObject(teacher, Teacher.class);
-        int insert = teacherDao.insert(addTeacher);
+    public int addTeacher(Teacher teacher) {
+        int insert = teacherDao.insert(teacher);
         return insert;
     }
 
     @Override
-    public int addClass(String addClass) {
-        Class aClass = JSON.parseObject(addClass, Class.class);
-        int insert = classDao.insert(aClass);
+    public int addClass(Class addClass) {
+        int insert = classDao.insert(addClass);
         return insert;
     }
 

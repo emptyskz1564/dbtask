@@ -69,6 +69,10 @@ public class StudentServiceImpl implements StudentService {
         HashMap<String, Object> conditions = new HashMap<>();
         conditions.put(Constants.CLASS_ID,cid);
         List<Class> classes = classDao.selectByMap(conditions);
+        Student student = studentDao.selectById(cid);
+        if(student == null){
+            return false;
+        }
         int i = classStudentDao.insert(new ClassStudent(classes.get(0).getCid(), sid));
         return i>0;
     }
