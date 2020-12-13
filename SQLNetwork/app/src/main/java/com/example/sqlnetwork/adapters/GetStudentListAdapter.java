@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sqlnetwork.R;
-import com.example.sqlnetwork.domain.ClassResult;
 import com.example.sqlnetwork.domain.Result;
 
 import java.util.ArrayList;
@@ -18,7 +17,7 @@ import java.util.List;
 
 public class GetStudentListAdapter extends RecyclerView.Adapter<GetStudentListAdapter.InnerHolder> {
     private List<Result.Student> data = new ArrayList<>();
-    private GetClassListAdapter.OnItemClickListener mOnItemClickListener;
+    private GetStudentListAdapter.OnItemClickListener mOnItemClickListener;
 
     @NonNull
     @Override
@@ -51,12 +50,33 @@ public class GetStudentListAdapter extends RecyclerView.Adapter<GetStudentListAd
 
     @Override
     public int getItemCount() {
-        return 0;
+        return data.size();
     }
+
+
+    public void setData(Result result) {
+        data.clear();
+        if(result.getData()!=null){
+            data.addAll(result.getData());
+            notifyDataSetChanged();
+        }
+    }
+
+    public List<Result.Student> getData(){
+        return data;
+    }
+
 
     public class InnerHolder extends RecyclerView.ViewHolder {
         public InnerHolder(@NonNull View itemView) {
             super(itemView);
         }
+    }
+
+    public interface OnItemClickListener{
+        void  onClick(  int  position);
+    }
+    public  void  setOnItemClickListener(GetStudentListAdapter.OnItemClickListener onItemClickListener ){
+        this.mOnItemClickListener =onItemClickListener;
     }
 }

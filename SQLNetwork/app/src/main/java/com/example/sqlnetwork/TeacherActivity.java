@@ -2,6 +2,7 @@ package com.example.sqlnetwork;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sqlnetwork.adapters.GetClassListAdapter;
+import com.example.sqlnetwork.adapters.GetStudentListAdapter;
 import com.example.sqlnetwork.domain.ClassResult;
 import com.example.sqlnetwork.util.CommonUtil;
 import com.example.sqlnetwork.util.UrlEnum;
@@ -39,13 +41,16 @@ public class TeacherActivity extends AppCompatActivity {
 
 
     public void initView(){
-        RecyclerView view = this.findViewById(R.id.recyclerView);
+        RecyclerView view = this.findViewById(R.id.recyclerView2);
         view.setLayoutManager(new LinearLayoutManager(this));
         adapter = new GetClassListAdapter();
         adapter.setOnItemClickListener(new GetClassListAdapter.OnItemClickListener() {
             @Override
-            public void onClick(int position) {
-
+            public void onClick(final int position) {
+                Intent intent = new Intent(TeacherActivity.this,ClassStudentActivity.class);
+                intent.putExtra("cid",adapter.getData().get(position).getCid());
+                intent.putExtra("tid",tid);
+                startActivity(intent);
             }
         });
         view.setAdapter(adapter);
@@ -90,4 +95,10 @@ public class TeacherActivity extends AppCompatActivity {
 
         }
     }
+
+    public void addTeacherClass(View view){
+
+    }
+
+
 }

@@ -65,7 +65,7 @@ public class Result {
         public void setMajor(String major) {
             this.major = major;
         }
-        
+
         public String getGrade() {
             return grade;
         }

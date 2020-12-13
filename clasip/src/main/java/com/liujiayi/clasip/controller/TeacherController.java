@@ -66,7 +66,7 @@ public class TeacherController {
         LocalDateTime localDateTime = LocalDateTime.now();
         OpenClass openClass = new OpenClass(tid,cid,version,localDateTime);
         openClassDao.insert(openClass);
-        return Result.successs2(version);
+        return Result.successs(String.valueOf(version));
     }
 
 

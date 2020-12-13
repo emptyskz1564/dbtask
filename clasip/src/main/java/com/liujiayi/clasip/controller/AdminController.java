@@ -1,5 +1,6 @@
 package com.liujiayi.clasip.controller;
 
+import com.liujiayi.clasip.dao.ClassDao;
 import com.liujiayi.clasip.pojo.Class;
 import com.liujiayi.clasip.pojo.Student;
 import com.liujiayi.clasip.pojo.Teacher;
@@ -33,6 +34,9 @@ public class AdminController {
     @Autowired
     TeacherService teacherService;
 
+    @Autowired
+    ClassDao classDao;
+
     /**
      * 获取所有课程
      * @return 课程列表
@@ -64,9 +68,9 @@ public class AdminController {
         if (teacherByCid.getTid() == null) {
             return Result.failure(ErrorEnum.E_90004);
         }
-        List<Student> allStudentByCid = studentService.getAllStudentByCid(cid);
+        List<Student> studentList = classDao.cidToStus(cid);
         HashMap<String, Object> result = new HashMap<>();
-        result.put(Constants.STUDENTS,allStudentByCid);
+        result.put(Constants.STUDENTS,studentList);
         result.put(Constants.TEACHER,teacherByCid);
         result.put(Constants.CLASS_INFO,classByCid);
 
