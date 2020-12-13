@@ -34,6 +34,19 @@ public class TeacherController {
     }
 
 
+    @ResponseBody
+    @GetMapping("search/{info}")
+    public Object sear(@PathVariable("info")String info){
+        info = "%"+info+"%";
+        List<Teacher> teachers = teacherDao.search(info);
+        if(teachers.size()==0){
+            return Result.failure(ErrorEnum.E_90004);
+        }else {
+            return Result.successs2(teachers);
+        }
+    }
+
+
 
 
 
