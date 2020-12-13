@@ -24,7 +24,4 @@ import java.util.List;
 public class Class implements Serializable {
     String cid;
     String className;
-
-//    public Class() {
-//    }
 }

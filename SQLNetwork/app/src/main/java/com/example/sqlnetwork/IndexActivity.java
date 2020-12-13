@@ -59,13 +59,6 @@ public class IndexActivity extends AppCompatActivity {
         System.out.println(sid);
         initView();
         new init(sid).run();
-
-
-
-
-
-
-
     }
 
     public void initView(){

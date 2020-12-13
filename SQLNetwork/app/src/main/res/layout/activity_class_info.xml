@@ -28,13 +28,13 @@
         app:layout_constraintTop_toBottomOf="@+id/ClassName_ClassInfo" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/msg_ClassInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="65dp"
         android:layout_marginLeft="65dp"
         android:layout_marginBottom="85dp"
-        android:text="TextView"
+        android:text="msg"
         app:layout_constraintBottom_toTopOf="@+id/SignCode_ClassInfo"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -47,6 +47,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginBottom="315dp"
         android:ems="10"
+        android:hint="请输入签到码"
         android:inputType="textPersonName"
         android:text="Name"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -60,7 +61,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
-        android:text="Button"
+        android:text="签到"
         app:layout_constraintBaseline_toBaselineOf="@+id/SignCode_ClassInfo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/SignCode_ClassInfo" />

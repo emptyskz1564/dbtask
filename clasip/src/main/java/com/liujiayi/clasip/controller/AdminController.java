@@ -39,6 +39,7 @@ public class AdminController {
      */
     @GetMapping("/getAllClass")
     public Object getAllClass(){
+
         List<Class> allClass = adminService.getAllClass();
         if(allClass==null || allClass.isEmpty()){
             return Result.failure(Constants.SUCCESS_CODE_MSG,Constants.THERE_IS_NOCLASS,allClass);
