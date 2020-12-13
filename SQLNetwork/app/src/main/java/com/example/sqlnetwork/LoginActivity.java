@@ -81,4 +81,27 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(new Intent(LoginActivity.this,Register.class));
     }
 
+    public void teacherLogin(View view){
+
+        Request request = CommonUtil.getRequest(UrlEnum.TEACHER_LOGIN + sid.getText().toString() + "/" + pwd.getText().toString());
+        Call call = CommonUtil.getClient().newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Request request, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Response response) throws IOException {
+                ResponseBody body = response.body();
+                Gson gson = CommonUtil.getGson();
+                CommonResult commonResult = gson.fromJson(body.string(), CommonResult.class);
+                if("200".equals(commonResult.getCode())){
+                    System.out.println(commonResult.getMessage());
+                    startActivity(new Intent(LoginActivity.this,TeacherActivity.class));
+                }
+            }
+        });
+    }
+
 }
