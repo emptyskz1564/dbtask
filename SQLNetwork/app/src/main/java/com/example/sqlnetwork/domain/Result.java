@@ -13,15 +13,13 @@ public class Result {
         private String pwd;
         private String name;
         private String major;
-        private String className;
         private String grade;
 
-        public Student(String sid, String pwd, String name, String major, String className, String grade) {
+        public Student(String sid, String pwd, String name, String major, String grade) {
             this.sid = sid;
             this.pwd = pwd;
             this.name = name;
             this.major = major;
-            this.className = className;
             this.grade = grade;
         }
 
@@ -32,7 +30,6 @@ public class Result {
                     ", pwd='" + pwd + '\'' +
                     ", name='" + name + '\'' +
                     ", major='" + major + '\'' +
-                    ", className='" + className + '\'' +
                     ", grade='" + grade + '\'' +
                     '}';
         }
@@ -68,15 +65,7 @@ public class Result {
         public void setMajor(String major) {
             this.major = major;
         }
-
-        public String getClassName() {
-            return className;
-        }
-
-        public void setClassName(String className) {
-            this.className = className;
-        }
-
+        
         public String getGrade() {
             return grade;
         }

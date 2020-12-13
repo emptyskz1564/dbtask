@@ -36,12 +36,12 @@ public class StudentServiceImpl implements StudentService {
         classStudentQueryWrapper.eq("cid",cid);
         List<ClassStudent> classStudents = classStudentDao.selectList(classStudentQueryWrapper);
         QueryWrapper<Student> studentQueryWrapper = new QueryWrapper<>();
-        ArrayList<String> condition = new ArrayList<>();
+
         for (ClassStudent classStudent :
                 classStudents) {
-            condition.add(classStudent.getSid());
+            studentQueryWrapper.eq("sid",classStudent.getSid()).or();
         }
-        studentQueryWrapper.in("sid",condition);
+
         List<Student> students = studentDao.selectList(studentQueryWrapper);
         return students;
     }

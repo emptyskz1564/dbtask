@@ -47,7 +47,9 @@ public class AdminServiceImpl implements AdminService {
         QueryWrapper<TeacherClass> classTeacherQueryWrapper = new QueryWrapper<>();
         classTeacherQueryWrapper.eq(Constants.CLASS_ID,cid);
         TeacherClass classTeacher = classTeacherDao.selectOne(classTeacherQueryWrapper);
-        Teacher teacher = teacherDao.selectById(classTeacher.getTid());
+        QueryWrapper<Teacher> teacherQueryWrapper = new QueryWrapper<>();
+        teacherQueryWrapper.eq("tid",classTeacher.getTid());
+        Teacher teacher = teacherDao.selectOne(teacherQueryWrapper);
         return teacher;
     }
 

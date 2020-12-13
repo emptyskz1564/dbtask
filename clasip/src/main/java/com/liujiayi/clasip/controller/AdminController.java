@@ -55,10 +55,15 @@ public class AdminController {
     @GetMapping("/getClassInfoByCid/{cid}")
     public Object getClassInfoByCid(@PathVariable("cid") String cid){
         Class classByCid = studentService.getClassByCid(cid);
+        System.out.println(classByCid.getCid());
         if(classByCid == null){
             return Result.failure(ErrorEnum.E_90004);
         }
         Teacher teacherByCid = adminService.getTeacherByCid(cid);
+        System.out.println(teacherByCid.getTid());
+        if (teacherByCid.getTid() == null) {
+            return Result.failure(ErrorEnum.E_90004);
+        }
         List<Student> allStudentByCid = studentService.getAllStudentByCid(cid);
         HashMap<String, Object> result = new HashMap<>();
         result.put(Constants.STUDENTS,allStudentByCid);

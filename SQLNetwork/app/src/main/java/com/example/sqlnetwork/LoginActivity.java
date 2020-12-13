@@ -98,7 +98,9 @@ public class LoginActivity extends AppCompatActivity {
                 CommonResult commonResult = gson.fromJson(body.string(), CommonResult.class);
                 if("200".equals(commonResult.getCode())){
                     System.out.println(commonResult.getMessage());
-                    startActivity(new Intent(LoginActivity.this,TeacherActivity.class));
+                    Intent intent = new Intent(LoginActivity.this, TeacherActivity.class);
+                    intent.putExtra("tid",sid.getText().toString());
+                    startActivity(intent);
                 }
             }
         });
