@@ -1,6 +1,7 @@
 package com.liujiayi.clasip.pojo;
 
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.*;
 import org.springframework.stereotype.Repository;
@@ -22,6 +23,7 @@ import java.util.List;
 @Repository
 @TableName("Class")
 public class Class implements Serializable {
+    @TableId("cid")
     String cid;
     String className;
     String teacher;

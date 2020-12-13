@@ -1,5 +1,6 @@
 package com.liujiayi.clasip.controller;
 
+import com.liujiayi.clasip.dao.StudentDao;
 import com.liujiayi.clasip.pojo.Class;
 import com.liujiayi.clasip.pojo.SignUp;
 import com.liujiayi.clasip.pojo.Student;
@@ -25,6 +26,10 @@ public class StudentController {
 
     @Autowired
     StudentService studentService;
+
+
+    @Autowired
+    StudentDao studentDao;
 
 
     /**
@@ -135,6 +140,12 @@ public class StudentController {
         return Result.successs(sign);
     }
 
+
+    @GetMapping("/delete/{sid}/{cid}")
+    public Object delete(@PathVariable("sid") String sid,@PathVariable("cid") String cid){
+        studentDao.tuike(sid,cid);
+        return Result.successs("退课成功！");
+    }
 
 
 }

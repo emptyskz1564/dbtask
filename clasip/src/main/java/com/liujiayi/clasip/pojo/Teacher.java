@@ -1,5 +1,6 @@
 package com.liujiayi.clasip.pojo;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.*;
 import org.springframework.stereotype.Repository;
@@ -25,6 +26,7 @@ public class Teacher implements Serializable {
      * tid
      * 数据库主键，自创账号
      */
+    @TableId("tid")
     String tid;
     String pwd;
     String name;
