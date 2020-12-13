@@ -7,6 +7,8 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * 创建时间: 2020-10-14 21:00
  * 文件备注:
@@ -19,5 +21,9 @@ public interface TeacherDao extends BaseMapper<Teacher> {
 
     @Select("select * from Teacher wher tid=#{tid} and pwd=#{pwd}")
     public Teacher tealogin(@Param("tid")String tid,@Param("pwd")String pwd);
+
+    //教师搜索接口
+    @Select("select * from Teacher where tid like #{info} or name like #{info} or info like #{info}")
+    public List<Teacher> search(@Param("info")String info);
 
 }
