@@ -121,8 +121,8 @@ public class StudentController {
     @GetMapping("/signUp/{sid}/{cid}/{version}/{lng}/{lat}")
     public Object signUp(@PathVariable("sid") String sid, @PathVariable("cid") String cid, @PathVariable("version")Integer version,@PathVariable("lng")Double lng,@PathVariable("lat")Double lat){
         SignUp signUp = new SignUp(sid,cid,version,LocalDateTime.now(),lng,lat);
-        studentService.signUp(signUp);
-        return null;
+        boolean b = studentService.signUp(signUp);
+        return b?Result.successs("签到成功"):Result.failure("203","签到失败");
     }
 
     @GetMapping("getSign/{cid}")

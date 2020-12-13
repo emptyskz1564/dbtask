@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.sqlnetwork.domain.AClassResult;
 import com.example.sqlnetwork.domain.ClassResult;
+import com.example.sqlnetwork.domain.CommonResult;
 import com.example.sqlnetwork.domain.SignResult;
 import com.example.sqlnetwork.domain.StrResult;
 import com.example.sqlnetwork.util.CommonUtil;
@@ -22,6 +23,7 @@ import com.google.gson.Gson;
 import com.squareup.okhttp.Call;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.Connection;
+import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
@@ -113,6 +115,30 @@ public class ClassInfoActivity extends AppCompatActivity {
             System.out.println("暂无签到");
         } else {
             EditText signCode = findViewById(R.id.SignCode_ClassInfo);
+            //https://hailicy.xyz/clasip/student/signUp/{sid}/{cid}/{version}/{lng}/{lat}
+            Request request = CommonUtil.getRequest("https://hailicy.xyz/clasip/student/signUp/" + sid + "/" + cid + "/" + signCode.getText() + "/");
+            OkHttpClient client = CommonUtil.getClient();
+            Call call = client.newCall(request);
+            call.enqueue(new Callback() {
+                @Override
+                public void onFailure(Request request, IOException e) {
+                    e.printStackTrace();
+                }
+
+                @Override
+                public void onResponse(Response response) throws IOException {
+                    if(response.code() == 200){
+                        ResponseBody body = response.body();
+                        Gson gson = CommonUtil.getGson();
+                        CommonResult commonResult = gson.fromJson(body.string(), CommonResult.class);
+                        if("200".equals(commonResult.getCode())){
+                            System.out.println("签到成功");
+                        } else {
+                            System.out.println("签到失败");
+                        }
+                    }
+                }
+            });
 
         }
     }
