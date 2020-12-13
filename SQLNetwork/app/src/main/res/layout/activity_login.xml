@@ -39,6 +39,7 @@
         android:background="#CEE8EC"
         android:onClick="login"
         android:text="学生登录"
+        android:textColor="#0F804F"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.479"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,6 +53,7 @@
         android:background="#E4BDBD"
         android:onClick="goRegister"
         android:text="学生注册"
+        android:textColor="#673AB7"
         app:layout_constraintStart_toStartOf="@+id/login"
         app:layout_constraintTop_toBottomOf="@+id/login" />
 
@@ -71,7 +73,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
         android:text="hubu签到系统"
+        android:textAllCaps="true"
+        android:textColor="#438AE1"
         android:textSize="30sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
@@ -84,6 +89,7 @@
         android:background="#CEEACF"
         android:onClick="teacherLogin"
         android:text="教师登录"
+        android:textColor="#872101"
         app:layout_constraintEnd_toEndOf="@+id/goRegister"
         app:layout_constraintTop_toBottomOf="@+id/goRegister" />
 </androidx.constraintlayout.widget.ConstraintLayout>

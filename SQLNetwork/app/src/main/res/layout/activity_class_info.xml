@@ -29,41 +29,38 @@
 
     <TextView
         android:id="@+id/msg_ClassInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="65dp"
-        android:layout_marginLeft="65dp"
+        android:layout_width="212dp"
+        android:layout_height="118dp"
         android:layout_marginBottom="85dp"
         android:text="msg"
         app:layout_constraintBottom_toTopOf="@+id/SignCode_ClassInfo"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/SignCode_ClassInfo"
+        app:layout_constraintStart_toStartOf="@+id/SignCode_ClassInfo" />
 
     <EditText
         android:id="@+id/SignCode_ClassInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="315dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="315dp"
+        android:layout_marginBottom="44dp"
         android:ems="10"
         android:hint="请输入签到码"
         android:inputType="textPersonName"
-        android:text="Name"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/Sign"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ClassName_ClassInfo" />
+        app:layout_constraintBottom_toTopOf="@+id/Sign"
+        app:layout_constraintEnd_toEndOf="@+id/Sign"
+        app:layout_constraintStart_toStartOf="@+id/Sign" />
 
     <Button
         android:id="@+id/Sign"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
+        android:layout_width="208dp"
+        android:layout_height="63dp"
+        android:layout_marginBottom="208dp"
+        android:background="#52A1F4"
         android:onClick="sign"
         android:text="签到"
-        app:layout_constraintBaseline_toBaselineOf="@+id/SignCode_ClassInfo"
+        android:textColor="#FF9800"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/SignCode_ClassInfo" />
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
