@@ -85,7 +85,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void teacherLogin(View view){
 
-        Request request = CommonUtil.getRequest(UrlEnum.TEACHER_LOGIN + sid.getText().toString() + "/" + pwd.getText().toString());
+        Request request = CommonUtil.getRequest(UrlEnum.TEACHER_LOGIN.getUrl() + sid.getText().toString() + "/" + pwd.getText().toString());
         Call call = CommonUtil.getClient().newCall(request);
         call.enqueue(new Callback() {
             @Override
@@ -95,6 +95,8 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Response response) throws IOException {
+                System.out.println(response.code());
+                System.out.println(response.body().string());
                 ResponseBody body = response.body();
                 Gson gson = CommonUtil.getGson();
                 CommonResult commonResult = gson.fromJson(body.string(), CommonResult.class);
