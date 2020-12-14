@@ -68,6 +68,17 @@ public class ClassController {
         }
     }
 
+    @ResponseBody
+    @GetMapping("/classes")
+    public Object getAllClasses(){
+        List<Class> aa = classDao.getAll();
+        if(aa.size()==0){
+            return Result.failure(ErrorEnum.E_90004);
+        }else{
+            return Result.successs2(aa);
+        }
+    }
+
 
 
 

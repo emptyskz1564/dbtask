@@ -2,6 +2,7 @@ package com.example.sqlnetwork;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -42,6 +43,7 @@ public class IndexActivity extends AppCompatActivity {
         final Intent intent = getIntent();
         sid = intent.getStringExtra("sid");
         allClass = findViewById(R.id.textView18);
+        allClass.setMovementMethod(ScrollingMovementMethod.getInstance());
         System.out.println(sid);
         initView();
         new init(sid).run();

@@ -1,6 +1,7 @@
 package com.liujiayi.clasip.controller;
 
 import com.liujiayi.clasip.dao.ClassStudentDao;
+import com.liujiayi.clasip.dao.SignUpDao;
 import com.liujiayi.clasip.dao.StudentDao;
 import com.liujiayi.clasip.pojo.Class;
 import com.liujiayi.clasip.pojo.SignUp;
@@ -37,6 +38,28 @@ public class StudentController {
 
     @Autowired
     ClassStudentDao classStudentDao;
+
+    @Autowired
+    SignUpDao signUpDao;
+
+    @ResponseBody
+    @GetMapping("/getSignedStus/{version}")
+    public Object signed(@PathVariable("version") String version){
+//        boolean code = studentService.login(token);
+        List<Student> studentList = signUpDao.getSigned(version);
+
+        if(studentList.size()==0){
+            return Result.failure(ErrorEnum.E_90004);
+        }else{
+            return Result.successs2(studentList);
+        }
+    }
+
+
+
+
+
+
 
 
     /**
@@ -91,11 +114,23 @@ public class StudentController {
      * @param cid 课程id
      * @return  某课堂的所有学生信息
      */
+//    @ResponseBody
+//    @GetMapping("getAllStudentByCid/{cid}")
+//    public Object getAllStudentByCid(@PathVariable("cid") String cid){
+//        List<Student> allStudentByCid = studentService.getAllStudentByCid(cid);
+//        return Result.successs(allStudentByCid);
+//    }
+
     @ResponseBody
     @GetMapping("getAllStudentByCid/{cid}")
     public Object getAllStudentByCid(@PathVariable("cid") String cid){
-        List<Student> allStudentByCid = studentService.getAllStudentByCid(cid);
+//        List<Student> allStudentByCid = studentService.getAllStudentByCid(cid);
+        List<Student> allStudentByCid = classStudentDao.getAllSTus(cid);
+        if(allStudentByCid.size()==0){
+            return Result.failure(ErrorEnum.E_90004);
+        }
         return Result.successs(allStudentByCid);
+
     }
 
     /**
