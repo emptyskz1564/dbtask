@@ -25,6 +25,7 @@ import com.squareup.okhttp.Response;
 import com.squareup.okhttp.ResponseBody;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ClassStudentActivity extends AppCompatActivity {
@@ -33,6 +34,7 @@ public class ClassStudentActivity extends AppCompatActivity {
     private String cid;
     TextView code;
     CommonResult commonResult;
+    TextView studentList;
 
 
     @Override
@@ -42,6 +44,7 @@ public class ClassStudentActivity extends AppCompatActivity {
         Intent intent = getIntent();
         tid = intent.getStringExtra("tid");
         cid = intent.getStringExtra("cid");
+        studentList = findViewById(R.id.textView14);
 
         initView();
         new init().run();
@@ -123,4 +126,38 @@ public class ClassStudentActivity extends AppCompatActivity {
         });
     }
 
+
+    public void refresh(View view){
+        Request request = CommonUtil.getRequest(UrlEnum.GET_SIGN_STUDENT.getUrl()+code);
+        Call call = CommonUtil.getClient().newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Request request, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Response response) throws IOException {
+                ResponseBody body = response.body();
+                String string = body.string();
+                Result result = CommonUtil.getGson().fromJson(string, Result.class);
+                StringBuffer stringBuffer = new StringBuffer();
+                for (Result.Student student:
+                     result.getData()) {
+                    stringBuffer.append(student.getName()+"     ");
+                }
+                updateUI2(stringBuffer.toString());
+            }
+        });
+    }
+
+
+    public void updateUI2(final String list){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                studentList.setText(list);
+            }
+        });
+    }
 }

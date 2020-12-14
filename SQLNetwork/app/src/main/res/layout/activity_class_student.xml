@@ -86,6 +86,7 @@
         android:layout_height="54dp"
         android:layout_marginTop="12dp"
         android:background="#409DE6"
+        android:onClick="refresh"
         android:text="刷新查看已签到同学"
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="@+id/getSignCode"

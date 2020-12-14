@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -32,6 +33,7 @@ public class IndexActivity extends AppCompatActivity {
 
     private GetClassListAdapter adapter;
     private String sid;
+    TextView allClass;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,6 +41,7 @@ public class IndexActivity extends AppCompatActivity {
         setContentView(R.layout.activity_index);
         final Intent intent = getIntent();
         sid = intent.getStringExtra("sid");
+        allClass = findViewById(R.id.textView18);
         System.out.println(sid);
         initView();
         new init(sid).run();
@@ -58,8 +61,6 @@ public class IndexActivity extends AppCompatActivity {
             }
         });
         view.setAdapter(adapter);
-
-
     }
 
     public void updateUI(final List<ClassResult.Class> classResult){
@@ -97,7 +98,39 @@ public class IndexActivity extends AppCompatActivity {
                 }
             });
 
+            Request request1 = CommonUtil.getRequest(UrlEnum.GET_ALL_CLASS.getUrl());
+            Call call1 = CommonUtil.getClient().newCall(request1);
+            call1.enqueue(new Callback() {
+                @Override
+                public void onFailure(Request request, IOException e) {
+                    e.printStackTrace();
+                }
+
+                @Override
+                public void onResponse(Response response) throws IOException {
+                    ResponseBody body = response.body();
+                    String string = body.string();
+                    StudentClassResult studentClassResult = CommonUtil.getGson().fromJson(string, StudentClassResult.class);
+                    List<ClassResult.Class> data = studentClassResult.getData();
+                    StringBuffer stringBuffer = new StringBuffer();
+                    for (ClassResult.Class aclass :
+                            data) {
+                        stringBuffer.append(aclass.getClassName()+"     课程码："+aclass.getCid()+"     授课教师："+aclass.getTeacher()+"\n");
+                    }
+                    updateUI1(stringBuffer.toString());
+                }
+            });
+
         }
+    }
+
+    public void updateUI1(final String string){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                allClass.setText(string);
+            }
+        });
     }
 
     public void addClass(View view){

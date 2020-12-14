@@ -12,7 +12,10 @@ public enum UrlEnum {
     GET_STUDENT_BY_CID("获取某班级所有学生","https://hailicy.xyz/clasip/cidToAllStus/"),
     GET_SIGN_CODE("发起签到获取签到码","https://hailicy.xyz/clasip/teacher/sign/"),
     GET_SIGN("获取签到","https://hailicy.xyz/clasip/teacher/getsign2/"),
-    GET_CLASS_BY_CID("获取单个课程信息","https://hailicy.xyz/clasip/student/getClassInfoByCid/");
+    GET_CLASS_BY_CID("获取单个课程信息","https://hailicy.xyz/clasip/student/getClassInfoByCid/"),
+    GET_SIGN_STUDENT("获取以签到学生","https://hailicy.xyz/clasip/student/getSignedStus/"),
+    GET_ALL_CLASS("获取所有课程","https://hailicy.xyz/clasip/admin/getAllClass"),
+    ;
 
     private String msg;
     private String url;
