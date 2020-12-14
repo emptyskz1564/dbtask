@@ -51,9 +51,9 @@ public class SignResult {
         private String tid;
         private String cid;
         private Integer version;
-        private Timestamp startTime;
+        private String startTime;
 
-        public Sign(String tid, String cid, Integer version, Timestamp startTime) {
+        public Sign(String tid, String cid, Integer version, String startTime) {
             this.tid = tid;
             this.cid = cid;
             this.version = version;
@@ -84,11 +84,11 @@ public class SignResult {
             this.version = version;
         }
 
-        public Timestamp getStartTime() {
+        public String getStartTime() {
             return startTime;
         }
 
-        public void setStartTime(Timestamp start_time) {
+        public void setStartTime(String start_time) {
             this.startTime = startTime;
         }
 

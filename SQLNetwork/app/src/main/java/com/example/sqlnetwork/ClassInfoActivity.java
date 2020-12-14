@@ -63,7 +63,7 @@ public class ClassInfoActivity extends AppCompatActivity {
         private String cid;
         private String url;
 
-        public Init(String sid, String url) {
+        public Init(String cid, String url) {
             this.cid = cid;
             this.url = url;
         }
@@ -92,7 +92,8 @@ public class ClassInfoActivity extends AppCompatActivity {
                             classCode = findViewById(R.id.ClassCode_ClassInfo);
                             msg = findViewById(R.id.msg_ClassInfo);
                             updateUI();
-                            Request request1 = CommonUtil.getRequest("http://192.168.124.6:8080/student/getSign/" + cid);
+                            System.out.println(cid+"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+                            Request request1 = CommonUtil.getRequest(UrlEnum.GET_SIGN.getUrl() + cid);
                             Call call1 = CommonUtil.getClient().newCall(request1);
                             call1.enqueue(new Callback() {
                                 @Override
@@ -115,6 +116,8 @@ public class ClassInfoActivity extends AppCompatActivity {
 
                                             updateUI1();
                                         }
+                                    } else {
+                                        System.out.println(response.body().string());
                                     }
                                 }
                             });
@@ -138,7 +141,7 @@ public class ClassInfoActivity extends AppCompatActivity {
         } else {
             EditText signCode = findViewById(R.id.SignCode_ClassInfo);
             //https://hailicy.xyz/clasip/student/signUp/{sid}/{cid}/{version}/{lng}/{lat}
-            Request request = CommonUtil.getRequest("https://hailicy.xyz/clasip/student/signUp/" + sid + "/" + cid + "/" + signCode.getText() + "/");
+            Request request = CommonUtil.getRequest("https://hailicy.xyz/clasip/student/signUp2/" + sid + "/" + cid + "/" + signCode.getText().toString());
             OkHttpClient client = CommonUtil.getClient();
             Call call = client.newCall(request);
             call.enqueue(new Callback() {
@@ -153,6 +156,7 @@ public class ClassInfoActivity extends AppCompatActivity {
                         ResponseBody body = response.body();
                         Gson gson = CommonUtil.getGson();
                         CommonResult commonResult = gson.fromJson(body.string(), CommonResult.class);
+                        System.out.println(commonResult);
                         if("200".equals(commonResult.getCode())){
                             System.out.println("签到成功");
                         } else {
@@ -179,7 +183,7 @@ public class ClassInfoActivity extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                msg.setText("您有一条正在进行的签到，发起时间:" + signResult.getData().get(0).getStart_time());
+                msg.setText("您有一条正在进行的签到，发起时间:" + signResult.getData().get(0).getStartTime());
             }
         });
     }

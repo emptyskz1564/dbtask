@@ -11,6 +11,7 @@ public enum UrlEnum {
     ALL_CLASS_BY_TID("老师获取所有课程","https://hailicy.xyz/clasip/admin/getAllClassByTid/"),
     GET_STUDENT_BY_CID("获取某班级所有学生","https://hailicy.xyz/clasip/cidToAllStus/"),
     GET_SIGN_CODE("发起签到获取签到码","https://hailicy.xyz/clasip/teacher/sign/"),
+    GET_SIGN("获取签到","https://hailicy.xyz/clasip/teacher/getsign2/"),
     GET_CLASS_BY_CID("获取单个课程信息","https://hailicy.xyz/clasip/student/getClassInfoByCid/");
 
     private String msg;

@@ -89,7 +89,7 @@ public class ClassStudentActivity extends AppCompatActivity {
     }
 
     public void getSignCode(View view){
-        Request request = CommonUtil.getRequest(UrlEnum.GET_SIGN_CODE.getUrl() + cid + "/" + tid);
+        Request request = CommonUtil.getRequest(UrlEnum.GET_SIGN_CODE.getUrl() + tid + "/" + cid);
         Call call = CommonUtil.getClient().newCall(request);
         call.enqueue(new Callback() {
             @Override
