@@ -117,10 +117,6 @@ public class StudentController {
     }
 
 
-
-
-
-
     /**
      * 获取某学生的所有课程
      * @param sid   学号
