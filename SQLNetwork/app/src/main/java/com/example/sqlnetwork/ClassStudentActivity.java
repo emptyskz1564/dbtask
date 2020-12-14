@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -89,6 +90,8 @@ public class ClassStudentActivity extends AppCompatActivity {
     }
 
     public void getSignCode(View view){
+        final Toast t1 = Toast.makeText(this.getApplicationContext(), "发起签到成功！", Toast.LENGTH_SHORT);
+
         Request request = CommonUtil.getRequest(UrlEnum.GET_SIGN_CODE.getUrl() + tid + "/" + cid);
         Call call = CommonUtil.getClient().newCall(request);
         call.enqueue(new Callback() {
@@ -103,6 +106,7 @@ public class ClassStudentActivity extends AppCompatActivity {
                 Gson gson = CommonUtil.getGson();
                 commonResult = gson.fromJson(body.string(), CommonResult.class);
                 if("200".equals(commonResult.getCode())){
+                    t1.show();
                     code = findViewById(R.id.getCode);
                     updateUI();
                 }

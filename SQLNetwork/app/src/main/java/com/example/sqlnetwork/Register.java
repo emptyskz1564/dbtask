@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -41,6 +42,8 @@ public class Register extends AppCompatActivity {
     }
 
     public void register(View view){
+        final Toast t1 = Toast.makeText(this.getApplicationContext(), "注册成功，请登录！", Toast.LENGTH_SHORT);
+
         Student student = new Student(sid.getText().toString(), password.getText().toString(), name.getText().toString(), major.getText().toString(), grade.getText().toString());
         final String requestBody = CommonUtil.getGson().toJson(student);
 
@@ -61,6 +64,7 @@ public class Register extends AppCompatActivity {
 
                 if(response.code() == 200){
                     startActivity(new Intent(Register.this,LoginActivity.class));
+                    t1.show();
                 } else {
 
                 }

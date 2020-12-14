@@ -74,27 +74,27 @@
         android:id="@+id/register"
         android:layout_width="199dp"
         android:layout_height="42dp"
-        android:layout_marginBottom="84dp"
+        android:layout_marginBottom="24dp"
         android:background="#EFB9B9"
         android:onClick="register"
         android:text="注册"
         android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/to_login"
+        app:layout_constraintEnd_toEndOf="@+id/to_login"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/to_login" />
 
     <Button
         android:id="@+id/to_login"
         android:layout_width="198dp"
         android:layout_height="40dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="156dp"
         android:background="#8DDCCC"
         android:onClick="toLogin"
-        android:text="登录"
+        android:text="返回登录页面"
         android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/register"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintHorizontal_bias="0.483"
         app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

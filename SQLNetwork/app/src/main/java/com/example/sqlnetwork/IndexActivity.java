@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -122,6 +123,8 @@ public class IndexActivity extends AppCompatActivity {
     public void addClass(View view){
         EditText editText = findViewById(R.id.Class_Code);
         String classCode = editText.getText().toString();
+        final Toast t1 = Toast.makeText(this.getApplicationContext(), "添加课程成功！", Toast.LENGTH_SHORT);
+
         System.out.println(UrlEnum.ADD_TO_CLASS.getUrl() + sid + "/" + classCode);
         final Request request = CommonUtil.getRequest(UrlEnum.ADD_TO_CLASS.getUrl() + sid + "/" + classCode);
         Call call = CommonUtil.getClient().newCall(request);
@@ -138,6 +141,7 @@ public class IndexActivity extends AppCompatActivity {
                     CommonResult commonResult = gson.fromJson(body.string(), CommonResult.class);
                     if("200".equals(commonResult.getCode())){
                         System.out.println("添加成功");
+                        t1.show();
                         Request request = CommonUtil.getRequest(UrlEnum.ALL_CLASSES_BY_SID.getUrl() + sid);
                         Call call = CommonUtil.getClient().newCall(request);
                         call.enqueue(new Callback() {

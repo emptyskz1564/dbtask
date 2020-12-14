@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -38,11 +39,13 @@ public class LoginActivity extends AppCompatActivity {
         sid = findViewById(R.id.login_sid);
         pwd = findViewById(R.id.login_pwd);
         login = findViewById(R.id.login);
+
     }
 
     public void login(View view){
         Token token = new Token(sid.getText().toString(), pwd.getText().toString());
-
+        final Toast t1 = Toast.makeText(this.getApplicationContext(), "登录成功！", Toast.LENGTH_SHORT);
+        final Toast t2 = Toast.makeText(this.getApplicationContext(), "登录失败，请重新登录！", Toast.LENGTH_SHORT);
         String json = CommonUtil.getGson().toJson(token);
         System.out.println(json);
         final Request request = CommonUtil.postRequest(UrlEnum.LOGIN.getUrl(), json);
@@ -63,16 +66,22 @@ public class LoginActivity extends AppCompatActivity {
                     CommonResult commonResult = gson.fromJson(body.string(), CommonResult.class);
                     if("200".equals(commonResult.getCode())){
                         System.out.println("登录成功");
+                        t1.show();
+//                        Toast.makeText(LoginActivity.this,"登陆成功！",Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(LoginActivity.this.getApplicationContext(), "登录成功！", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getApplicationContext(), "默认的Toast", Toast.LENGTH_SHORT);
                         Intent intent = new Intent(LoginActivity.this, IndexActivity.class);
                         intent.putExtra("sid",sid.getText().toString());
                         startActivity(intent);
                     } else {
                         System.out.println("登录失败");
+                        t2.show();
                         System.out.println(commonResult.toString());
                     }
 
                 } else {
                     System.out.println("请求失败");
+                    t2.show();
                     System.out.println(response.body().string());
                 }
             }
@@ -88,6 +97,8 @@ public class LoginActivity extends AppCompatActivity {
 
         Request request = CommonUtil.getRequest(UrlEnum.TEACHER_LOGIN.getUrl() + sid.getText().toString() + "/" + pwd.getText().toString());
         Call call = CommonUtil.getClient().newCall(request);
+        final Toast t1 = Toast.makeText(this.getApplicationContext(), "登录成功！", Toast.LENGTH_SHORT);
+
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Request request, IOException e) {
@@ -96,12 +107,14 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Response response) throws IOException {
+
                 System.out.println(response.code());
                 ResponseBody body = response.body();
                 Gson gson = CommonUtil.getGson();
                 StrResult commonResult = gson.fromJson(body.string(),StrResult.class);
                 if("200".equals(commonResult.getCode())){
                     System.out.println(commonResult.getMessage());
+                    t1.show();
                     Intent intent = new Intent(LoginActivity.this, TeacherActivity.class);
                     intent.putExtra("tid",sid.getText().toString());
                     startActivity(intent);

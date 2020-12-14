@@ -70,6 +70,7 @@ public class ClassInfoActivity extends AppCompatActivity {
 
         @Override
         public void run() {
+
             System.out.println("开始初始化");
             Request request = CommonUtil.getRequest(url);
             Call call = CommonUtil.getClient().newCall(request);
@@ -81,6 +82,7 @@ public class ClassInfoActivity extends AppCompatActivity {
 
                 @Override
                 public void onResponse(Response response) throws IOException {
+
                     ResponseBody body = response.body();
                     if(response.code() == 200){
                         String string = body.string();
@@ -105,6 +107,7 @@ public class ClassInfoActivity extends AppCompatActivity {
                                 public void onResponse(Response response) throws IOException {
                                     if(response.code()==200){
                                         System.out.println("请求成功");
+
                                         ResponseBody body = response.body();
                                         String string1 = body.string();
                                         System.out.println(string1);
@@ -136,8 +139,14 @@ public class ClassInfoActivity extends AppCompatActivity {
     }
 
     public void sign(View view){
+        final Toast t1 = Toast.makeText(this.getApplicationContext(), "您已成功签到！", Toast.LENGTH_SHORT);
+        final Toast t2 = Toast.makeText(this.getApplicationContext(), "当前暂无签到！", Toast.LENGTH_SHORT);
+        final Toast t3 = Toast.makeText(this.getApplicationContext(), "签到失败，请重新签到或检查网络！", Toast.LENGTH_SHORT);
+
+
         if(sign==null){
             System.out.println("暂无签到");
+            t2.show();
         } else {
             EditText signCode = findViewById(R.id.SignCode_ClassInfo);
             //https://hailicy.xyz/clasip/student/signUp/{sid}/{cid}/{version}/{lng}/{lat}
@@ -159,8 +168,10 @@ public class ClassInfoActivity extends AppCompatActivity {
                         System.out.println(commonResult);
                         if("200".equals(commonResult.getCode())){
                             System.out.println("签到成功");
+                            t1.show();
                         } else {
                             System.out.println("签到失败");
+                            t3.show();
                         }
                     }
                 }
