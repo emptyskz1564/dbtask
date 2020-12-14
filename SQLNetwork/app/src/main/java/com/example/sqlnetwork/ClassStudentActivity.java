@@ -35,6 +35,7 @@ public class ClassStudentActivity extends AppCompatActivity {
     TextView code;
     CommonResult commonResult;
     TextView studentList;
+    String signCode;
 
 
     @Override
@@ -111,6 +112,7 @@ public class ClassStudentActivity extends AppCompatActivity {
                 if("200".equals(commonResult.getCode())){
                     t1.show();
                     code = findViewById(R.id.getCode);
+                    signCode = commonResult.getMessage();
                     updateUI();
                 }
             }
@@ -128,7 +130,8 @@ public class ClassStudentActivity extends AppCompatActivity {
 
 
     public void refresh(View view){
-        Request request = CommonUtil.getRequest(UrlEnum.GET_SIGN_STUDENT.getUrl()+code);
+        final Request request = CommonUtil.getRequest(UrlEnum.GET_SIGN_STUDENT.getUrl()+signCode);
+        System.out.println(signCode);
         Call call = CommonUtil.getClient().newCall(request);
         call.enqueue(new Callback() {
             @Override
@@ -140,13 +143,16 @@ public class ClassStudentActivity extends AppCompatActivity {
             public void onResponse(Response response) throws IOException {
                 ResponseBody body = response.body();
                 String string = body.string();
+                System.out.println(string);
                 Result result = CommonUtil.getGson().fromJson(string, Result.class);
-                StringBuffer stringBuffer = new StringBuffer();
-                for (Result.Student student:
-                     result.getData()) {
-                    stringBuffer.append(student.getName()+"     ");
+                if("200".equals(result.getCode())){
+                    StringBuffer stringBuffer = new StringBuffer();
+                    for (Result.Student student:
+                            result.getData()) {
+                        stringBuffer.append(student.getName()+"     ");
+                    }
+                    updateUI2(stringBuffer.toString());
                 }
-                updateUI2(stringBuffer.toString());
             }
         });
     }

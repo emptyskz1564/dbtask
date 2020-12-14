@@ -194,7 +194,7 @@ public class ClassInfoActivity extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                msg.setText("您有一条正在进行的签到，发起时间:" + signResult.getData().get(0).getStartTime());
+                msg.setText("您有一条正在进行的签到");
             }
         });
     }
