@@ -38,26 +38,6 @@ public class IndexActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_index);
         final Intent intent = getIntent();
-
-//        Button bt2 = findViewById(R.id.buttonSelect);
-//        bt2.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent1 = new Intent(IndexActivity.this,lookMyCourseActivity.class);
-//                intent1.putExtra("sid",sid);
-//                startActivity(intent1);
-//            }
-//        });
-
-//        Button bt3 = findViewById(R.id.buttonQiandao);
-//        bt3.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//            }
-//        });
-
-
         sid = intent.getStringExtra("sid");
         System.out.println(sid);
         initView();
@@ -158,13 +138,8 @@ public class IndexActivity extends AppCompatActivity {
                                 updateUI(classResult.getData());
                             }
                         });
-
                     }
-
             }
         });
     }
-
-
-
 }
