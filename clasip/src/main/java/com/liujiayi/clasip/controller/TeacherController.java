@@ -64,10 +64,24 @@ public class TeacherController {
         Random rand = new Random();
         //生成签到码
         int version =rand.nextInt(999999 - 100000 + 1) + 100000;
-        LocalDateTime localDateTime = LocalDateTime.now();
-        OpenClass openClass = new OpenClass(tid,cid,version,localDateTime);
+//        LocalDateTime localDateTime = LocalDateTime.now();
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        OpenClass openClass = new OpenClass(tid,cid,version,timestamp);
         openClassDao.insert(openClass);
         return Result.successs(String.valueOf(version));
+    }
+
+
+    @ResponseBody
+    @GetMapping("/getsign2/{cid}")
+    public Object gets2(@PathVariable("cid")String cid){
+        List<OpenClass> sign = openClassDao.getSign(cid);
+        if(sign.size()==0){
+            return Result.failure(ErrorEnum.E_90004);
+        }else{
+//            System.out.println(sign.get(0).getStartTime()+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+            return Result.successs2(sign);
+        }
     }
 
 

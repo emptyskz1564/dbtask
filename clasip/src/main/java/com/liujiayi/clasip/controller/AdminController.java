@@ -149,9 +149,9 @@ public class AdminController {
 
 
     //仿照这个
-    @CrossOrigin(origins = "*", maxAge = 3600)
+//    @CrossOrigin(origins = "*", maxAge = 3600)
     @GetMapping("/addStudentToClass4/{sid}/{cid}")
-    public Object addStudentToClass4(@PathVariable("sid") String sid,@PathVariable("cid") String cid){
+    public Object addStudentToClass3(@PathVariable("sid") String sid,@PathVariable("cid") String cid){
         classStudentDao.insert(new ClassStudent(sid,cid));
         return Result.successs("加入课程成功！");
     }

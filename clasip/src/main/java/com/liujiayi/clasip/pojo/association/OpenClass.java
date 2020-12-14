@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.*;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Data
@@ -18,5 +19,5 @@ public class OpenClass {
     private String tid;
     private String cid;
     private Integer version;
-    private LocalDateTime start_time;
+    private Timestamp startTime;
 }

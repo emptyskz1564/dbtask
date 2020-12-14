@@ -3,7 +3,11 @@ package com.liujiayi.clasip.dao;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.liujiayi.clasip.pojo.association.OpenClass;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * 创建时间: 2020-11-22 16:52
@@ -14,4 +18,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 @Mapper
 public interface OpenClassDao extends BaseMapper<OpenClass> {
+
+    @Select("select * from OpenClass where cid=#{cid}")
+    public List<OpenClass> getSign(@Param("cid")String cid);
+
 }
