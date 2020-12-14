@@ -142,7 +142,7 @@ public class AdminController {
 
     @GetMapping("/addTeacher/{tid}/{name}/{pwd}/{info}")
     public Object addTeacher(@PathVariable("tid")String tid,@PathVariable("name")String name,@PathVariable("pwd")String pwd,@PathVariable("info")String info){
-        Teacher teacher = new Teacher(tid,  pwd,name, info);
+        Teacher teacher = new Teacher(tid, name,pwd, info);
         int i = adminService.addTeacher(teacher);
         return i>0 ? Result.successs("添加成功"):Result.failure(ErrorEnum.E_10009);
     }
