@@ -95,18 +95,14 @@ public class TeacherController {
                 return Result.failure(ErrorEnum.E_999);
             }
 
+            //判读多个签到，只取最新那个
 
-            //定义时间格式
-//            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddhhmmss");
-//            String str = dateFormat.format(tmSign);
-//            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddhhmm");
-//            long millionSeconds = sdf.parse(str).getTime();// 毫秒
-//            System.out.println(millionSeconds);
-
-
-
-
-            return Result.successs2(sign);
+            List<OpenClass> sign2 = openClassDao.getSign(cid);
+            sign2.clear();
+            sign2.add(sign.get(0));
+            System.out.println(sign2.get(0).getVersion());
+            //sign有签到
+            return Result.successs2(sign2);
         }
     }
 

@@ -19,7 +19,7 @@ import java.util.List;
 @Mapper
 public interface OpenClassDao extends BaseMapper<OpenClass> {
 
-    @Select("select * from OpenClass where cid=#{cid}")
+    @Select("select * from OpenClass where cid=#{cid} order by start_time desc")
     public List<OpenClass> getSign(@Param("cid")String cid);
 
 }
