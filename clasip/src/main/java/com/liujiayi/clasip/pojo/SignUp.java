@@ -25,7 +25,7 @@ public class SignUp implements Serializable {
     private String sid;
     private String cid;
     private Integer version;
-    private LocalDateTime signUpTime;
+    private Timestamp signupTime;
     Double lng;//经度
     Double lat;//纬度
 }

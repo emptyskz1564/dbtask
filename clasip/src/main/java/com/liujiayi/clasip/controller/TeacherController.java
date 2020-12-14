@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.nio.file.Path;
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -74,12 +76,36 @@ public class TeacherController {
 
     @ResponseBody
     @GetMapping("/getsign2/{cid}")
-    public Object gets2(@PathVariable("cid")String cid){
+    public Object gets2(@PathVariable("cid")String cid) throws ParseException {
         List<OpenClass> sign = openClassDao.getSign(cid);
         if(sign.size()==0){
             return Result.failure(ErrorEnum.E_90004);
         }else{
 //            System.out.println(sign.get(0).getStartTime()+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+            //判断是否在十分钟内
+            Timestamp tmSign = sign.get(0).getStartTime();
+            Timestamp tmNow = new Timestamp(System.currentTimeMillis());
+            System.out.println("当前时间："+tmNow.getTime());
+            System.out.println("发签到时间："+tmSign.getTime());
+            int a = Integer.valueOf((int) tmNow.getTime());
+            int b = (int) tmSign.getTime();
+            System.out.println("间隔了");
+            System.out.println((a-b)/1000.0/60.0+"分钟");
+            if(((a-b)/1000.0/60.0)>=10.0000){
+                return Result.failure(ErrorEnum.E_999);
+            }
+
+
+            //定义时间格式
+//            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddhhmmss");
+//            String str = dateFormat.format(tmSign);
+//            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddhhmm");
+//            long millionSeconds = sdf.parse(str).getTime();// 毫秒
+//            System.out.println(millionSeconds);
+
+
+
+
             return Result.successs2(sign);
         }
     }

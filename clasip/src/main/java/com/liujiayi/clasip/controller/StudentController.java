@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Vector;
@@ -149,7 +150,17 @@ public class StudentController {
     @ResponseBody
     @GetMapping("/signUp/{sid}/{cid}/{version}/{lng}/{lat}")
     public Object signUp(@PathVariable("sid") String sid, @PathVariable("cid") String cid, @PathVariable("version")Integer version,@PathVariable("lng")Double lng,@PathVariable("lat")Double lat){
-        SignUp signUp = new SignUp(sid,cid,version,LocalDateTime.now(),lng,lat);
+        Timestamp tm = new Timestamp(System.currentTimeMillis());
+        SignUp signUp = new SignUp(sid,cid,version,tm,lng,lat);
+        boolean b = studentService.signUp(signUp);
+        return b?Result.successs("签到成功"):Result.failure("203","签到失败");
+    }
+
+    @ResponseBody
+    @GetMapping("/signUp2/{sid}/{cid}/{version}")
+    public Object signUp2(@PathVariable("sid") String sid, @PathVariable("cid") String cid, @PathVariable("version")Integer version){
+        Timestamp tm = new Timestamp(System.currentTimeMillis());
+        SignUp signUp = new SignUp(sid,cid,version,tm,null,null);
         boolean b = studentService.signUp(signUp);
         return b?Result.successs("签到成功"):Result.failure("203","签到失败");
     }
