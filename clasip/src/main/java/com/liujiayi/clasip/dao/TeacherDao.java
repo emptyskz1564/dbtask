@@ -19,8 +19,8 @@ import java.util.List;
 @Repository
 public interface TeacherDao extends BaseMapper<Teacher> {
 
-    @Select("select * from Teacher wher tid=#{tid} and pwd=#{pwd}")
-    public Teacher tealogin(@Param("tid")String tid,@Param("pwd")String pwd);
+    @Select("select * from Teacher where tid=#{tid} and pwd=#{pwd}")
+    public List<Teacher> tealogin(@Param("tid")String tid,@Param("pwd")String pwd);
 
     //教师搜索接口
     @Select("select * from Teacher where tid like #{info} or name like #{info} or info like #{info}")

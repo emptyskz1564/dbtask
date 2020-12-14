@@ -22,7 +22,7 @@ public class testController {
 
 
     @ResponseBody
-    @RequestMapping("/test2/{str}")
+    @GetMapping("/test2/{str}")
     public Object test1(@PathVariable("str")String str){
 
 

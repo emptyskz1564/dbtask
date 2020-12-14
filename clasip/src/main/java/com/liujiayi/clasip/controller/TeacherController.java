@@ -8,6 +8,7 @@ import com.liujiayi.clasip.pojo.association.OpenClass;
 import com.liujiayi.clasip.util.ErrorEnum;
 import com.liujiayi.clasip.util.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.nio.file.Path;
@@ -20,7 +21,7 @@ import java.util.Random;
 /**
  * @author 刘斯昊
  */
-@RestController
+@Controller
 @RequestMapping("/teacher")
 public class TeacherController {
 
@@ -34,8 +35,8 @@ public class TeacherController {
     @ResponseBody
     @GetMapping("teacherlogin/{tid}/{pwd}")
     public Object teaLogin(@PathVariable("tid")String tid,@PathVariable("pwd")String pwd){
-        Teacher teacher = teacherDao.tealogin(tid,pwd);
-        if(teacher.getTid().equals(tid)){
+        List<Teacher> teachers = teacherDao.tealogin(tid,pwd);
+        if(teachers.size()==1){
             return Result.successs2("登录成功！");
         }else {
             return Result.failure(ErrorEnum.E_401);
