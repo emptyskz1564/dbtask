@@ -1,6 +1,6 @@
 package com.example.sqlnetwork.domain;
 
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 import java.util.List;
 
 public class SignResult {
@@ -51,13 +51,13 @@ public class SignResult {
         private String tid;
         private String cid;
         private Integer version;
-        private LocalDateTime start_time;
+        private Timestamp startTime;
 
-        public Sign(String tid, String cid, Integer version, LocalDateTime start_time) {
+        public Sign(String tid, String cid, Integer version, Timestamp startTime) {
             this.tid = tid;
             this.cid = cid;
             this.version = version;
-            this.start_time = start_time;
+            this.startTime = startTime;
         }
 
         public String getTid() {
@@ -84,12 +84,12 @@ public class SignResult {
             this.version = version;
         }
 
-        public LocalDateTime getStart_time() {
-            return start_time;
+        public Timestamp getStartTime() {
+            return startTime;
         }
 
-        public void setStart_time(LocalDateTime start_time) {
-            this.start_time = start_time;
+        public void setStartTime(Timestamp start_time) {
+            this.startTime = startTime;
         }
 
         @Override
@@ -98,7 +98,7 @@ public class SignResult {
                     "tid='" + tid + '\'' +
                     ", cid='" + cid + '\'' +
                     ", version=" + version +
-                    ", start_time=" + start_time +
+                    ", start_time=" + startTime +
                     '}';
         }
     }
