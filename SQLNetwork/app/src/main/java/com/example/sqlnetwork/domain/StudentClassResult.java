@@ -1,14 +1,13 @@
 package com.example.sqlnetwork.domain;
 
-import java.io.Serializable;
 import java.util.List;
 
-public class ClassResult {
+public class StudentClassResult {
     private String code;
     private String message;
-    private MyData data;
+    private List<ClassResult.Class> data;
 
-    public ClassResult(String code, String message, MyData data) {
+    public StudentClassResult(String code, String message, List<ClassResult.Class> data) {
         this.code = code;
         this.message = message;
         this.data = data;
@@ -30,111 +29,21 @@ public class ClassResult {
         this.message = message;
     }
 
-    public MyData getData() {
+    public List<ClassResult.Class> getData() {
         return data;
     }
 
-    public void setData(MyData data) {
+    public void setData(List<ClassResult.Class> data) {
         this.data = data;
     }
 
     @Override
     public String toString() {
-        return "ClassResult{" +
+        return "StudentClassResult{" +
                 "code='" + code + '\'' +
                 ", message='" + message + '\'' +
                 ", data=" + data +
                 '}';
-    }
-
-    public class MyData{
-        private List<Class> classInfo;
-        private Teacher teacher;
-
-        public MyData(List<Class> classList, Teacher teacher) {
-            this.classInfo = classList;
-            this.teacher = teacher;
-        }
-
-        public List<Class> getClassList() {
-            return classInfo;
-        }
-
-        public void setClassList(List<Class> classList) {
-            this.classInfo = classList;
-        }
-
-        public Teacher getTeacher() {
-            return teacher;
-        }
-
-        public void setTeacher(Teacher teacher) {
-            this.teacher = teacher;
-        }
-
-        @Override
-        public String toString() {
-            return "MyData{" +
-                    "classList=" + classInfo +
-                    ", teacher=" + teacher +
-                    '}';
-        }
-    }
-
-    public class Teacher {
-        private String tid;
-        private String pwd;
-        private String name;
-        private String info;
-
-        public Teacher(String tid, String pwd, String name, String info) {
-            this.tid = tid;
-            this.pwd = pwd;
-            this.name = name;
-            this.info = info;
-        }
-
-        public String getTid() {
-            return tid;
-        }
-
-        public void setTid(String tid) {
-            this.tid = tid;
-        }
-
-        public String getPwd() {
-            return pwd;
-        }
-
-        public void setPwd(String pwd) {
-            this.pwd = pwd;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getInfo() {
-            return info;
-        }
-
-        public void setInfo(String info) {
-            this.info = info;
-        }
-
-        @Override
-        public String toString() {
-            return "Teacher{" +
-                    "tid='" + tid + '\'' +
-                    ", pwd='" + pwd + '\'' +
-                    ", name='" + name + '\'' +
-                    ", info='" + info + '\'' +
-                    '}';
-        }
     }
 
     public class Class {
@@ -203,6 +112,4 @@ public class ClassResult {
                     '}';
         }
     }
-
-
 }

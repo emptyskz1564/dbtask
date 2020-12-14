@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.sqlnetwork.adapters.GetClassListAdapter;
 import com.example.sqlnetwork.domain.ClassResult;
 import com.example.sqlnetwork.domain.CommonResult;
+import com.example.sqlnetwork.domain.StudentClassResult;
 import com.example.sqlnetwork.util.CommonUtil;
 import com.example.sqlnetwork.util.UrlEnum;
 import com.google.gson.Gson;
@@ -24,6 +25,7 @@ import com.squareup.okhttp.Response;
 import com.squareup.okhttp.ResponseBody;
 
 import java.io.IOException;
+import java.util.List;
 
 public class IndexActivity extends AppCompatActivity {
 
@@ -79,7 +81,7 @@ public class IndexActivity extends AppCompatActivity {
 
     }
 
-    public void updateUI(final ClassResult classResult){
+    public void updateUI(final List<ClassResult.Class> classResult){
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -109,8 +111,8 @@ public class IndexActivity extends AppCompatActivity {
                 public void onResponse(Response response) throws IOException {
                     ResponseBody body = response.body();
                     Gson gson = CommonUtil.getGson();
-                    ClassResult classResult = gson.fromJson(body.string(), ClassResult.class);
-                    updateUI(classResult);
+                    StudentClassResult classResult = gson.fromJson(body.string(), StudentClassResult.class);
+                    updateUI(classResult.getData());
                 }
             });
 
@@ -131,10 +133,6 @@ public class IndexActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Response response) throws IOException {
-                if (response.code() != 200){
-                    System.out.println("请求失败");
-                    System.out.println(response.body().string());
-                } else {
                     ResponseBody body = response.body();
                     Gson gson = CommonUtil.getGson();
                     CommonResult commonResult = gson.fromJson(body.string(), CommonResult.class);
@@ -152,12 +150,12 @@ public class IndexActivity extends AppCompatActivity {
                             public void onResponse(Response response) throws IOException {
                                 ResponseBody body = response.body();
                                 Gson gson = CommonUtil.getGson();
-                                ClassResult classResult = gson.fromJson(body.string(), ClassResult.class);
-                                updateUI(classResult);
+                                StudentClassResult classResult = gson.fromJson(body.string(), StudentClassResult.class);
+                                updateUI(classResult.getData());
                             }
                         });
+
                     }
-                }
 
             }
         });

@@ -69,7 +69,7 @@ public class StudentServiceImpl implements StudentService {
         HashMap<String, Object> conditions = new HashMap<>();
         conditions.put(Constants.CLASS_ID,cid);
         List<Class> classes = classDao.selectByMap(conditions);
-        Student student = studentDao.selectById(cid);
+        Student student = studentDao.selectById(sid);
         if(student == null){
             return false;
         }
@@ -116,16 +116,10 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public List<OpenClass> getSign(String cid) {
-        HashMap<String, Object> condition = new HashMap<>();
-        condition.put(Constants.CLASS_ID,cid);
-        ArrayList<OpenClass> result = new ArrayList<>();
-        List<OpenClass> openClasses = openClassDao.selectByMap(condition);
-        for(OpenClass signUp : openClasses){
-            if(signUp.getStart_time().getDayOfMonth() == LocalDateTime.now().getDayOfMonth() && signUp.getStart_time().getMinute() >= LocalDateTime.now().getMinute() - 10 && signUp.getStart_time().getMinute() <= LocalDateTime.now().getMinute() + 10 ){
-                result.add(signUp);
-            }
-        }
-        return result;
+        QueryWrapper<OpenClass> openClassQueryWrapper = new QueryWrapper<>();
+        openClassQueryWrapper.eq("cid",cid);
+        List<OpenClass> openClasses = openClassDao.selectList(openClassQueryWrapper);
+        return openClasses;
     }
 
 

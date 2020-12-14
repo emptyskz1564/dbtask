@@ -3,9 +3,9 @@ package com.example.sqlnetwork.domain;
 public class StrResult {
     private String code;
     private String message;
-    private Object data;
+    private String data;
 
-    public StrResult(String code, String message, Object data) {
+    public StrResult(String code, String message, String data) {
         this.code = code;
         this.message = message;
         this.data = data;
@@ -27,11 +27,11 @@ public class StrResult {
         this.message = message;
     }
 
-    public Object getData() {
+    public String getData() {
         return data;
     }
 
-    public void setData(Object data) {
+    public void setData(String data) {
         this.data = data;
     }
 

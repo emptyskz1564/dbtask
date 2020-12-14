@@ -10,6 +10,7 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.sqlnetwork.domain.CommonResult;
+import com.example.sqlnetwork.domain.StrResult;
 import com.example.sqlnetwork.domain.Token;
 import com.example.sqlnetwork.util.CommonUtil;
 import com.example.sqlnetwork.util.UrlEnum;
@@ -96,10 +97,9 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(Response response) throws IOException {
                 System.out.println(response.code());
-                System.out.println(response.body().string());
                 ResponseBody body = response.body();
                 Gson gson = CommonUtil.getGson();
-                CommonResult commonResult = gson.fromJson(body.string(), CommonResult.class);
+                StrResult commonResult = gson.fromJson(body.string(),StrResult.class);
                 if("200".equals(commonResult.getCode())){
                     System.out.println(commonResult.getMessage());
                     Intent intent = new Intent(LoginActivity.this, TeacherActivity.class);

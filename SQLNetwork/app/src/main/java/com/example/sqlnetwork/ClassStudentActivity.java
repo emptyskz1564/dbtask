@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.sqlnetwork.adapters.GetClassListAdapter;
 import com.example.sqlnetwork.adapters.GetStudentListAdapter;
 import com.example.sqlnetwork.domain.ClassResult;
 import com.example.sqlnetwork.domain.CommonResult;
@@ -25,11 +24,14 @@ import com.squareup.okhttp.Response;
 import com.squareup.okhttp.ResponseBody;
 
 import java.io.IOException;
+import java.util.List;
 
 public class ClassStudentActivity extends AppCompatActivity {
     private GetStudentListAdapter adapter;
     private String tid;
     private String cid;
+    TextView code;
+    CommonResult commonResult;
 
 
     @Override
@@ -87,7 +89,7 @@ public class ClassStudentActivity extends AppCompatActivity {
     }
 
     public void getSignCode(View view){
-        Request request = CommonUtil.getRequest(UrlEnum.GET_SIGN_CODE + cid + "/" + tid);
+        Request request = CommonUtil.getRequest(UrlEnum.GET_SIGN_CODE.getUrl() + cid + "/" + tid);
         Call call = CommonUtil.getClient().newCall(request);
         call.enqueue(new Callback() {
             @Override
@@ -99,11 +101,20 @@ public class ClassStudentActivity extends AppCompatActivity {
             public void onResponse(Response response) throws IOException {
                 ResponseBody body = response.body();
                 Gson gson = CommonUtil.getGson();
-                CommonResult commonResult = gson.fromJson(body.string(), CommonResult.class);
+                commonResult = gson.fromJson(body.string(), CommonResult.class);
                 if("200".equals(commonResult.getCode())){
-                    TextView code = findViewById(R.id.getCode);
-                    code.setText(commonResult.getMessage());
+                    code = findViewById(R.id.getCode);
+                    updateUI();
                 }
+            }
+        });
+    }
+
+    public void updateUI(){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                code.setText(commonResult.getMessage());
             }
         });
     }

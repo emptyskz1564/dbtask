@@ -5,7 +5,7 @@ import java.util.List;
 public class AClassResult {
     private String code;
     private String message;
-    private Class aClass;
+    private Class data;
 
 
     public class Class {
@@ -75,10 +75,10 @@ public class AClassResult {
         }
     }
 
-    public AClassResult(String code, String message, Class aClass) {
+    public AClassResult(String code, String message, Class data) {
         this.code = code;
         this.message = message;
-        this.aClass = aClass;
+        this.data = data;
     }
 
     public String getCode() {
@@ -97,12 +97,12 @@ public class AClassResult {
         this.message = message;
     }
 
-    public Class getaClass() {
-        return aClass;
+    public Class getData() {
+        return data;
     }
 
-    public void setaClass(Class aClass) {
-        this.aClass = aClass;
+    public void setData(Class data) {
+        this.data = data;
     }
 
     @Override
@@ -110,7 +110,7 @@ public class AClassResult {
         return "AClassResult{" +
                 "code='" + code + '\'' +
                 ", message='" + message + '\'' +
-                ", aClass=" + aClass +
+                ", data=" + data +
                 '}';
     }
 }

@@ -36,6 +36,11 @@ public class ClassInfoActivity extends AppCompatActivity {
     private String sid;
     private String cid;
     private SignResult.Sign sign;
+    TextView msg;
+    TextView className;
+    TextView classCode;
+    AClassResult classResult;
+    SignResult signResult;
 
 
     @Override
@@ -48,7 +53,10 @@ public class ClassInfoActivity extends AppCompatActivity {
         cid = intent.getStringExtra("cid");
 
         Init init = new Init(cid, UrlEnum.GET_CLASS_BY_CID.getUrl() + cid);
-        init.start();
+        System.out.println(sid);
+        System.out.println(cid);
+
+        init.run();
     }
 
     public class Init extends Thread{
@@ -62,7 +70,8 @@ public class ClassInfoActivity extends AppCompatActivity {
 
         @Override
         public void run() {
-            Request request = CommonUtil.getRequest(url+cid);
+            System.out.println("开始初始化");
+            Request request = CommonUtil.getRequest(url);
             Call call = CommonUtil.getClient().newCall(request);
             call.enqueue(new Callback() {
                 @Override
@@ -74,44 +83,52 @@ public class ClassInfoActivity extends AppCompatActivity {
                 public void onResponse(Response response) throws IOException {
                     ResponseBody body = response.body();
                     if(response.code() == 200){
-                        AClassResult classResult = CommonUtil.getGson().fromJson(body.toString(), AClassResult.class);
-
+                        String string = body.string();
+                        System.out.println(string);
+                        classResult = CommonUtil.getGson().fromJson(string, AClassResult.class);
+                        System.out.println(classResult);
                         if(classResult.getCode().equals("200")){
-                            TextView className = findViewById(R.id.ClassName_ClassInfo);
-                            TextView classCode = findViewById(R.id.ClassCode_ClassInfo);
-                            className.setText(classResult.getaClass().getClassName());
-                            classCode.setText(classResult.getaClass().getCid());
+                            className = findViewById(R.id.ClassName_ClassInfo);
+                            classCode = findViewById(R.id.ClassCode_ClassInfo);
+                            msg = findViewById(R.id.msg_ClassInfo);
+                            updateUI();
+                            Request request1 = CommonUtil.getRequest("http://192.168.124.6:8080/student/getSign/" + cid);
+                            Call call1 = CommonUtil.getClient().newCall(request1);
+                            call1.enqueue(new Callback() {
+                                @Override
+                                public void onFailure(Request request, IOException e) {
+                                    e.printStackTrace();
+                                }
+
+                                @Override
+                                public void onResponse(Response response) throws IOException {
+                                    if(response.code()==200){
+                                        System.out.println("请求成功");
+                                        ResponseBody body = response.body();
+                                        String string1 = body.string();
+                                        System.out.println(string1);
+                                        Gson gson = CommonUtil.getGson();
+                                        signResult = gson.fromJson(string1, SignResult.class);
+                                        System.out.println(signResult);
+                                        if("200".equals(signResult.getCode()) && signResult.getData() != null && signResult.getData().size() != 0){
+                                            sign = signResult.getData().get(0);
+
+                                            updateUI1();
+                                        }
+                                    }
+                                }
+                            });
                         }
 
+                    } else {
+                        System.out.println("请求失败");
                     }
 
 
                 }
             });
 
-            Request request1 = CommonUtil.getRequest("https://hailicy.xyz/clasip/student/getSign/" + cid);
-            Call call1 = CommonUtil.getClient().newCall(request1);
-            call1.enqueue(new Callback() {
-                @Override
-                public void onFailure(Request request, IOException e) {
-                    e.printStackTrace();
-                }
 
-                @Override
-                public void onResponse(Response response) throws IOException {
-                    if(response.code()==200){
-                        System.out.println("请求成功");
-                        ResponseBody body = response.body();
-                        Gson gson = CommonUtil.getGson();
-                        SignResult signResult = gson.fromJson(body.string(), SignResult.class);
-                        if("200".equals(signResult.getCode()) && signResult.getData() != null && signResult.getData().size() != 0){
-                            sign = signResult.getData().get(0);
-                            TextView msg = findViewById(R.id.msg_ClassInfo);
-                            msg.setText("您有一条正在进行的签到，发起时间:" + signResult.getData().get(0).getStart_time());
-                        }
-                    }
-                }
-            });
         }
     }
 
@@ -148,5 +165,22 @@ public class ClassInfoActivity extends AppCompatActivity {
         }
     }
 
-
+    public void updateUI(){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                msg.setText("暂无签到");
+                className.setText(classResult.getData().getClassName());
+                classCode.setText(classResult.getData().getCid());
+            }
+        });
+    }
+    public void updateUI1(){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                msg.setText("您有一条正在进行的签到，发起时间:" + signResult.getData().get(0).getStart_time());
+            }
+        });
+    }
 }

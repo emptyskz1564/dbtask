@@ -46,7 +46,19 @@
 
             </intent-filter>
         </activity>
+        <activity android:name=".TeacherActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".ClassStudentActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

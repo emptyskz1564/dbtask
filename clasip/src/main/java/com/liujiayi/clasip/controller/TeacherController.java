@@ -37,7 +37,7 @@ public class TeacherController {
     public Object teaLogin(@PathVariable("tid")String tid,@PathVariable("pwd")String pwd){
         List<Teacher> teachers = teacherDao.tealogin(tid,pwd);
         if(teachers.size()==1){
-            return Result.successs("登录成功！");
+            return Result.successs2("登录成功！");
         }else {
             return Result.failure(ErrorEnum.E_401);
         }

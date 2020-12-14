@@ -3,6 +3,7 @@ package com.example.sqlnetwork;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,6 +27,9 @@ import java.io.IOException;
 public class TeacherActivity extends AppCompatActivity {
     private String tid;
     private GetClassListAdapter adapter;
+    private TextView teacherId;
+    TextView name;
+    TextView info;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -62,7 +66,10 @@ public class TeacherActivity extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                adapter.setData(classResult);
+                adapter.setData(classResult.getData().getClassList());
+                teacherId.setText(classResult.getData().getTeacher().getTid());
+                name.setText(classResult.getData().getTeacher().getName());
+                info.setText(classResult.getData().getTeacher().getInfo());
             }
         });
     }
@@ -88,7 +95,18 @@ public class TeacherActivity extends AppCompatActivity {
                 public void onResponse(Response response) throws IOException {
                     ResponseBody body = response.body();
                     Gson gson = CommonUtil.getGson();
-                    ClassResult classResult = gson.fromJson(body.string(), ClassResult.class);
+                    String string = body.string();
+                    System.out.println(string);
+                    ClassResult classResult = gson.fromJson(string, ClassResult.class);
+                    System.out.println(classResult);
+                    teacherId = findViewById(R.id.textView5);
+
+
+                    name = findViewById(R.id.textView6);
+
+
+                    info = findViewById(R.id.textView7);
+
                     updateUI(classResult);
                 }
             });
