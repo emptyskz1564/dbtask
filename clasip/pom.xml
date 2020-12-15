@@ -18,6 +18,14 @@
 
     <dependencies>
 
+        <!--thymeleaf 模板依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
+
+
 <!--        csvReader-->
         <!-- https://mvnrepository.com/artifact/org.jumpmind.symmetric/symmetric-csv -->
         <dependency>
@@ -146,6 +154,7 @@
 <!--    </build>-->
 
     <build>
+        <finalName>clasip</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

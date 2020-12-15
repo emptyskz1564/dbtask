@@ -1,7 +1,9 @@
 server:
-  port: 8081
+  port: 8080
 
 spring:
+  thymeleaf:
+    cache: false
   datasource:
     #url: jdbc:mysql:///ssm?useUnicode=true&characterEncoding=UTF-8&useSSL=false&autoReconnect=true&failOverReadOnly=false&serverTimezone=CTT
     url: jdbc:mysql://139.196.86.99:3306/clasip?useUnicode=true&characterEncoding=UTF-8&useSSL=false

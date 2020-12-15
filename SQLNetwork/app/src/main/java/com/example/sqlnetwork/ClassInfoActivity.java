@@ -145,7 +145,7 @@ public class ClassInfoActivity extends AppCompatActivity {
 
 
         if(sign==null){
-            System.out.println("暂无签到");
+            System.out.println("当前暂无签到");
             t2.show();
         } else {
             EditText signCode = findViewById(R.id.SignCode_ClassInfo);
