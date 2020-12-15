@@ -116,7 +116,11 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public int addClass(Class addClass) {
         int insert = classDao.insert(addClass);
-        return insert;
+        QueryWrapper<Teacher> teacherQueryWrapper = new QueryWrapper<>();
+        teacherQueryWrapper.eq("name",addClass.getTeacher());
+        Teacher teacher = teacherDao.selectOne(teacherQueryWrapper);
+        int insert1 = classTeacherDao.insert(new TeacherClass(teacher.getTid(), addClass.getCid()));
+        return insert>0&&insert1>0 ? 1 : 0;
     }
 
 
