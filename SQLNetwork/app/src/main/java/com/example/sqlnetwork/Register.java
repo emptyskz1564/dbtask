@@ -43,6 +43,8 @@ public class Register extends AppCompatActivity {
 
     public void register(View view){
         final Toast t1 = Toast.makeText(this.getApplicationContext(), "注册成功，请登录！", Toast.LENGTH_SHORT);
+        final Toast t2 = Toast.makeText(this.getApplicationContext(), "该学号已被注册！", Toast.LENGTH_SHORT);
+        final Toast t3 = Toast.makeText(this.getApplicationContext(), "请求失败，请重试！", Toast.LENGTH_SHORT);
 
         Student student = new Student(sid.getText().toString(), password.getText().toString(), name.getText().toString(), major.getText().toString(), grade.getText().toString());
         final String requestBody = CommonUtil.getGson().toJson(student);
@@ -53,6 +55,7 @@ public class Register extends AppCompatActivity {
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Request request, IOException e) {
+                t3.show();
                 e.printStackTrace();
             }
 
@@ -66,7 +69,7 @@ public class Register extends AppCompatActivity {
                     startActivity(new Intent(Register.this,LoginActivity.class));
                     t1.show();
                 } else {
-
+                    t2.show();
                 }
 
             }

@@ -6,6 +6,7 @@ import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,6 +33,7 @@ public class AddClassActivity extends AppCompatActivity {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_class);
 
@@ -47,6 +49,8 @@ public class AddClassActivity extends AppCompatActivity {
 
 
     public void add(View view){
+        final Toast t1 = Toast.makeText(this.getApplicationContext(), "添加课程成功！", Toast.LENGTH_SHORT);
+
         Request request = CommonUtil.getRequest(UrlEnum.TEACHER_CLASS.getUrl() + cid.getText().toString() + "/" + className.getText().toString() + "/" + teacher.getText().toString() + "/" + time.getText().toString() + "/" + info.getText().toString());
         Call call = CommonUtil.getClient().newCall(request);
         call.enqueue(new Callback() {
@@ -62,6 +66,7 @@ public class AddClassActivity extends AppCompatActivity {
                     String string = body.string();
                     CommonResult commonResult = CommonUtil.getGson().fromJson(string, CommonResult.class);
                     if("200".equals(commonResult.getCode())){
+                        t1.show();
                         Intent intent = new Intent(AddClassActivity.this, TeacherActivity.class);
                         startActivity(intent);
                     }

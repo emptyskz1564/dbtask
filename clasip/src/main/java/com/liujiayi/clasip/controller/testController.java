@@ -83,4 +83,16 @@ public class testController {
         modelAndView.setViewName("addtea.html");
         return modelAndView;
     }
+
+    @GetMapping("/upcsv1")
+    public ModelAndView upcsv1(ModelAndView modelAndView){
+        modelAndView.setViewName("test.html");
+        return modelAndView;
+    }
+
+    @GetMapping("/upcsv2")
+    public ModelAndView upcsv2(ModelAndView modelAndView){
+        modelAndView.setViewName("test2.html");
+        return modelAndView;
+    }
 }

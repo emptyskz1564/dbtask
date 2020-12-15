@@ -136,11 +136,11 @@ public class ExcelReceiver {
             sids.add(lines[0]);
             cids.add(lines[1]);
         }
-        List<String> sidList = studentDao.selectSid();
+//        List<String> sidList = classStudentDao.selectSid();
         int n = sids.size();
         for (int i=1;i<n;i++){
             //判断主键重复
-            if(!sidList.contains(sids.get(i)))
+//            if(!sidList.contains(sids.get(i)))
                 classStudentDao.insert(new ClassStudent(sids.get(i),cids.get(i)));
         }
     }
@@ -182,7 +182,7 @@ public class ExcelReceiver {
 
 
 //        File csvFile = transferToFile(file);
-        test1(file);
+        test2(file);
         System.out.println("上传成功");
         return Result.successs("csv上传数据成功！");
     }

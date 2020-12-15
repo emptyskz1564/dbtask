@@ -26,4 +26,7 @@ public interface ClassStudentDao extends BaseMapper<ClassStudent> {
     @Select("select a.* from clasip.Student a,clasip.StudentClass b where a.sid=b.sid and b.cid=#{cid}")
     public List<Student> getAllSTus(@Param("cid")String cid);
 
+    @Select("select sid from clasip.StudentClass")
+    public List<String> selectSid();
+
 }
