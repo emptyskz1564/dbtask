@@ -115,7 +115,8 @@ public class TeacherActivity extends AppCompatActivity {
     }
 
     public void addTeacherClass(View view){
-
+        Intent intent = new Intent(TeacherActivity.this, AddClassActivity.class);
+        startActivity(intent);
     }
 
 

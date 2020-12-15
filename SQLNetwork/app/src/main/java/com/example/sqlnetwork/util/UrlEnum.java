@@ -15,6 +15,7 @@ public enum UrlEnum {
     GET_CLASS_BY_CID("获取单个课程信息","https://hailicy.xyz/clasip/student/getClassInfoByCid/"),
     GET_SIGN_STUDENT("获取以签到学生","https://hailicy.xyz/clasip/student/getSignedStus/"),
     GET_ALL_CLASS("获取所有课程","https://hailicy.xyz/clasip/admin/getAllClass"),
+    TEACHER_CLASS("教师添加课程","https://hailicy.xyz/clasip/admin/addClass/")
     ;
 
     private String msg;
